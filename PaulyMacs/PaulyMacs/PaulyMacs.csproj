@@ -196,14 +196,35 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MenuItemsController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201712012033052_InitialCreate.cs" />
     <Compile Include="Migrations\201712012033052_InitialCreate.Designer.cs">
       <DependentUpon>201712012033052_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712012105151_AddedCustomerModel.cs" />
+    <Compile Include="Migrations\201712012105151_AddedCustomerModel.Designer.cs">
+      <DependentUpon>201712012105151_AddedCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712012108128_AddedEmployeeModel.cs" />
+    <Compile Include="Migrations\201712012108128_AddedEmployeeModel.Designer.cs">
+      <DependentUpon>201712012108128_AddedEmployeeModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712012116275_AddedOrderModel.cs" />
+    <Compile Include="Migrations\201712012116275_AddedOrderModel.Designer.cs">
+      <DependentUpon>201712012116275_AddedOrderModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712012136160_AddedRatingsandMenuModels.cs" />
+    <Compile Include="Migrations\201712012136160_AddedRatingsandMenuModels.Designer.cs">
+      <DependentUpon>201712012136160_AddedRatingsandMenuModels.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -280,6 +301,32 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Ratings\Create.cshtml" />
+    <Content Include="Views\Ratings\Delete.cshtml" />
+    <Content Include="Views\Ratings\Details.cshtml" />
+    <Content Include="Views\Ratings\Edit.cshtml" />
+    <Content Include="Views\Ratings\Index.cshtml" />
+    <Content Include="Views\MenuItems\Create.cshtml" />
+    <Content Include="Views\MenuItems\Delete.cshtml" />
+    <Content Include="Views\MenuItems\Details.cshtml" />
+    <Content Include="Views\MenuItems\Edit.cshtml" />
+    <Content Include="Views\MenuItems\Index.cshtml" />
+    <Content Include="Views\Customers\ViewMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -295,6 +342,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712012033052_InitialCreate.resx">
       <DependentUpon>201712012033052_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712012105151_AddedCustomerModel.resx">
+      <DependentUpon>201712012105151_AddedCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712012108128_AddedEmployeeModel.resx">
+      <DependentUpon>201712012108128_AddedEmployeeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712012116275_AddedOrderModel.resx">
+      <DependentUpon>201712012116275_AddedOrderModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712012136160_AddedRatingsandMenuModels.resx">
+      <DependentUpon>201712012136160_AddedRatingsandMenuModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
