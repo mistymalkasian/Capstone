@@ -123,5 +123,15 @@ namespace PaulyMacs.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult OpenOrders()
+        {
+            return View();
+        }
+
+        public ActionResult CompletedOrder()
+        {
+            return View();
+        }
     }
 }

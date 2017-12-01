@@ -333,7 +333,12 @@ namespace PaulyMacs.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        public ActionResult AddMenuItem()
+        {
+            return View();
+        }
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

@@ -332,6 +332,7 @@
     <Content Include="Views\Customers\RateService.cshtml" />
     <Content Include="Views\Manage\AddMenuItem.cshtml" />
     <Content Include="Views\Employees\OpenOrders.cshtml" />
+    <Content Include="Views\Employees\CompletedOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

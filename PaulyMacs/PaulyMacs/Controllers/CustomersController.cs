@@ -123,5 +123,26 @@ namespace PaulyMacs.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        public ActionResult ViewMenu()
+        {
+            return View();
+        }
+
+        public ActionResult ShoppingCart()
+        {
+            return View();
+        }
+
+        public ActionResult RateService()
+        {
+            return View();
+        }
+
+        public ActionResult ConfirmationPage()
+        {
+            return View();
+        }
     }
 }
