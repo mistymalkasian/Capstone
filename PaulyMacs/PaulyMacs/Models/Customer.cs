@@ -17,12 +17,15 @@ namespace PaulyMacs.Models
         public string LastName { get; set; }
 
         [Required]
+        [Phone]
         public string PhoneNumber { get; set; }
 
         [Required]
+        [EmailAddress]
         public string EmailAddress { get; set; }
 
-        public int Balance { get; set; }
+        [DataType(DataType.Currency)]
+        public double Balance { get; set; }
 
     }
 }

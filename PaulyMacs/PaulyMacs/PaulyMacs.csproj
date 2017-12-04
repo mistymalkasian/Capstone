@@ -226,6 +226,14 @@
     <Compile Include="Migrations\201712012136160_AddedRatingsandMenuModels.Designer.cs">
       <DependentUpon>201712012136160_AddedRatingsandMenuModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712041354257_UpdatedModels.cs" />
+    <Compile Include="Migrations\201712041354257_UpdatedModels.Designer.cs">
+      <DependentUpon>201712041354257_UpdatedModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712041452514_UpdatedDataAnnotations.cs" />
+    <Compile Include="Migrations\201712041452514_UpdatedDataAnnotations.Designer.cs">
+      <DependentUpon>201712041452514_UpdatedDataAnnotations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -360,6 +368,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712012136160_AddedRatingsandMenuModels.resx">
       <DependentUpon>201712012136160_AddedRatingsandMenuModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041354257_UpdatedModels.resx">
+      <DependentUpon>201712041354257_UpdatedModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041452514_UpdatedDataAnnotations.resx">
+      <DependentUpon>201712041452514_UpdatedDataAnnotations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

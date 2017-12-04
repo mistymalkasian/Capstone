@@ -133,5 +133,10 @@ namespace PaulyMacs.Controllers
         {
             return View();
         }
+
+        public ActionResult MyAction()
+        {
+            return View("CompletedOrder");
+        }
     }
 }
