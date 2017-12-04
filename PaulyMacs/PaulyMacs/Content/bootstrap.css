@@ -4515,9 +4515,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
   color: #999999;
 }
 
+/*CHANGE WHAT COLOR THE WORDS ON NAVBAR ARE WHEN YOU HOVER OVER THEM*/
+
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: #ffffff;
+  color: lightblue;
   background-color: transparent;
 }
 
@@ -4531,7 +4533,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-  color: #ffffff;
+  color: lightblue;
   background-color: transparent;
 }
 
@@ -4542,10 +4544,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
   background-color: #080808;
 }
 
+/*FIGURE OUT WHAT THIS DOES?*/
+
 .navbar-inverse .navbar-nav > .disabled > a,
 .navbar-inverse .navbar-nav > .disabled > a:hover,
 .navbar-inverse .navbar-nav > .disabled > a:focus {
-  color: aliceblue;
+  color: black;
   background-color: transparent;
 }
 
