@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PaulyMacs.Models;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace PaulyMacs.Controllers
 {
@@ -134,10 +136,35 @@ namespace PaulyMacs.Controllers
             return View();
         }
 
-        public ActionResult SendMsgsAndReturnView()
+        public async Task<ActionResult> SendMsgsAndReturnView()
         {
+            if (ModelState.IsValid)
+            {
+                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("andrewandmisty@gmail.com"));
+                message.From = new MailAddress("devcodecamptest@gmail.com");
+                message.Subject = "Rate Us!";
+                message.Body = "Were you happy with the service you received today? If so, please consider leaving a rating! <br> Click this button to rate us: <a href=\"google.com\">Here</a>";
+                message.IsBodyHtml = true;
 
-            return View("CompletedOrder");
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "devcodecamptest@gmail.com",
+                        Password = "devCodeDawg02"
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    await smtp.SendMailAsync(message);
+                    return RedirectToAction("CompletedOrder");
+                }
+            }
+            return View();
         }
     }
 }
+

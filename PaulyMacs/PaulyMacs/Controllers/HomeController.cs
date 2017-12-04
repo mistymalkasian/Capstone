@@ -46,7 +46,7 @@ namespace PaulyMacs.Controllers
                 var message = new MailMessage();
                 message.To.Add(new MailAddress("andrewandmisty@gmail.com")); 
                 message.From = new MailAddress("devcodecamptest@gmail.com");
-                message.Subject = "Rate Us!";
+                message.Subject = "Customer Feedback";
                 message.Body = string.Format(body, model.FromName, model.FromEmail, model.Message);
                 message.IsBodyHtml = true;
 
