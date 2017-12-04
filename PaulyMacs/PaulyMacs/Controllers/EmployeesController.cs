@@ -136,7 +136,7 @@ namespace PaulyMacs.Controllers
             return View();
         }
 
-        public async Task<ActionResult> SendMsgsAndConfirm()
+        public async Task<ActionResult> SendMsgsAndConfirm(Order order)
         {
             if (ModelState.IsValid)
             {
@@ -161,6 +161,8 @@ namespace PaulyMacs.Controllers
                     smtp.EnableSsl = true;
                     await smtp.SendMailAsync(message);
                     await SendText();
+                    order.isOrderOpen = false;
+                    db.SaveChanges();
                 }
             }
             return View("CompletedOrder");
