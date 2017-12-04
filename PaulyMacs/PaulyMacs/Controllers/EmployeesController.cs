@@ -140,7 +140,7 @@ namespace PaulyMacs.Controllers
         {
             if (ModelState.IsValid)
             {
-                var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+                //var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
                 var message = new MailMessage();
                 message.To.Add(new MailAddress("andrewandmisty@gmail.com"));
                 message.From = new MailAddress("devcodecamptest@gmail.com");
@@ -161,8 +161,6 @@ namespace PaulyMacs.Controllers
                     smtp.EnableSsl = true;
                     await smtp.SendMailAsync(message);
                     await SendText();
-
-                    //return RedirectToAction("CompletedOrder");
                 }
             }
             return View("CompletedOrder");
@@ -170,12 +168,12 @@ namespace PaulyMacs.Controllers
 
         public async Task<ActionResult> SendText()
         {
-            var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+            //var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
             var message = new MailMessage();
             message.To.Add(new MailAddress("2629946699@email.uscc.net"));
             message.From = new MailAddress("devcodecamptest@gmail.com");
-            message.Subject = "Rate Us!";
-            message.Body = "Your order is ready to be picked up at Pauly Mac's!";
+            message.Subject = "Your order is ready to be picked up at Pauly Mac's!";
+            message.Body = "We hope you enjoy your meal, and make sure to rate us!";
             message.IsBodyHtml = true;
 
             using (var smtp = new SmtpClient())
@@ -190,7 +188,7 @@ namespace PaulyMacs.Controllers
                 smtp.Port = 587;
                 smtp.EnableSsl = true;
                 await smtp.SendMailAsync(message);
-                return View("TextSent");
+                return View();
             }
         }
     }
