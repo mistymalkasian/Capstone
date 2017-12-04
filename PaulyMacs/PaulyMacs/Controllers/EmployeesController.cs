@@ -136,7 +136,7 @@ namespace PaulyMacs.Controllers
             return View();
         }
 
-        public async Task<ActionResult> SendMsgsAndReturnView()
+        public async Task<ActionResult> SendMsgsAndConfirm()
         {
             if (ModelState.IsValid)
             {
@@ -160,10 +160,38 @@ namespace PaulyMacs.Controllers
                     smtp.Port = 587;
                     smtp.EnableSsl = true;
                     await smtp.SendMailAsync(message);
-                    return RedirectToAction("CompletedOrder");
+                    await SendText();
+
+                    //return RedirectToAction("CompletedOrder");
                 }
             }
-            return View();
+            return View("CompletedOrder");
+        }
+
+        public async Task<ActionResult> SendText()
+        {
+            var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+            var message = new MailMessage();
+            message.To.Add(new MailAddress("2629946699@email.uscc.net"));
+            message.From = new MailAddress("devcodecamptest@gmail.com");
+            message.Subject = "Rate Us!";
+            message.Body = "Your order is ready to be picked up at Pauly Mac's!";
+            message.IsBodyHtml = true;
+
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = "devcodecamptest@gmail.com",
+                    Password = "devCodeDawg02"
+                };
+                smtp.Credentials = credential;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                await smtp.SendMailAsync(message);
+                return View("TextSent");
+            }
         }
     }
 }
