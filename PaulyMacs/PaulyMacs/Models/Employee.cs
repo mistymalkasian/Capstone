@@ -8,7 +8,8 @@ namespace PaulyMacs.Models
 {
     public class Employee
     {
-        public int Id { get; set; }
+        [Key]
+        public int EmployeeId { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -16,9 +17,11 @@ namespace PaulyMacs.Models
         [Required]
         public string LastName { get; set; }
 
+        [Required]
         [Phone]
         public string PhoneNumber { get; set; }
 
+        [Required]
         [EmailAddress]
         public string EmailAddress { get; set; }
 

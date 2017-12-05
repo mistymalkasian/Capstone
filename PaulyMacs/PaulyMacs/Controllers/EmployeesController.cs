@@ -145,7 +145,7 @@ namespace PaulyMacs.Controllers
                 message.To.Add(new MailAddress("andrewandmisty@gmail.com"));
                 message.From = new MailAddress("devcodecamptest@gmail.com");
                 message.Subject = "Rate Us!";
-                message.Body = "Were you happy with the service you received today? If so, please consider leaving a rating! <br> Click this button to rate us: <a href=\"google.com\">Here</a>";
+                message.Body = "Were you happy with the service you received today? <br> Follow this link to tell us how we did: <a href=\"google.com\">Rate my Service</a>";
                 message.IsBodyHtml = true;
 
                 using (var smtp = new SmtpClient())

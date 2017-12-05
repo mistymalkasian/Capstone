@@ -123,5 +123,10 @@ namespace PaulyMacs.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult AddMenuItem()
+        {
+            return View();
+        }
     }
 }

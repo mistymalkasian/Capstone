@@ -3,10 +3,74 @@ namespace PaulyMacs.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Customers",
+                c => new
+                    {
+                        CustomerId = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(nullable: false),
+                        LastName = c.String(nullable: false),
+                        PhoneNumber = c.String(nullable: false),
+                        EmailAddress = c.String(nullable: false),
+                        BalanceOwed = c.Double(nullable: false),
+                    })
+                .PrimaryKey(t => t.CustomerId);
+            
+            CreateTable(
+                "dbo.Employees",
+                c => new
+                    {
+                        EmployeeId = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(nullable: false),
+                        LastName = c.String(nullable: false),
+                        PhoneNumber = c.String(nullable: false),
+                        EmailAddress = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.EmployeeId);
+            
+            CreateTable(
+                "dbo.MenuItems",
+                c => new
+                    {
+                        MenuItemId = c.Int(nullable: false, identity: true),
+                        ItemName = c.String(nullable: false),
+                        ItemPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ItemDescription = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.MenuItemId);
+            
+            CreateTable(
+                "dbo.Orders",
+                c => new
+                    {
+                        OrderId = c.Int(nullable: false, identity: true),
+                        OrderDate = c.DateTime(nullable: false),
+                        isOrderOpen = c.Boolean(nullable: false),
+                        OrderContents = c.String(),
+                        OrderTotalPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        CustomerId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.OrderId)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
+                .Index(t => t.CustomerId);
+            
+            CreateTable(
+                "dbo.Ratings",
+                c => new
+                    {
+                        RatingId = c.Int(nullable: false, identity: true),
+                        NumberOfStars = c.Int(nullable: false),
+                        CustomerComments = c.String(),
+                        CustomerId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.RatingId)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
+                .Index(t => t.CustomerId);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -83,17 +147,26 @@ namespace PaulyMacs.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Ratings", "CustomerId", "dbo.Customers");
+            DropForeignKey("dbo.Orders", "CustomerId", "dbo.Customers");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Ratings", new[] { "CustomerId" });
+            DropIndex("dbo.Orders", new[] { "CustomerId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Ratings");
+            DropTable("dbo.Orders");
+            DropTable("dbo.MenuItems");
+            DropTable("dbo.Employees");
+            DropTable("dbo.Customers");
         }
     }
 }

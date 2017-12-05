@@ -7,16 +7,19 @@ using System.Web;
 
 namespace PaulyMacs.Models
 {
-    public class Rating
+    public class Cart
     {
         [Key]
-        public int RatingId { get; set; }
-        public int NumberOfStars { get; set; }
-        public string CustomerComments { get; set; }
+        public int CartId { get; set; }
 
-        //Foreign Keys
-        
+        public DateTime DateCreated { get; set; }
+
+        public bool isCheckedOut { get; set; }
+
+        //Foreign Key
+
         public int CustomerId { get; set; }
+
         public Customer Customer { get; set; }
 
     }

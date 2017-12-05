@@ -3,16 +3,16 @@ namespace PaulyMacs.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class UpdatedDataAnnotations : DbMigration
+    public partial class AddItemPicture : DbMigration
     {
         public override void Up()
         {
-            AlterColumn("dbo.Customers", "Balance", c => c.Double(nullable: false));
+            AddColumn("dbo.MenuItems", "ItemPicture", c => c.String());
         }
         
         public override void Down()
         {
-            AlterColumn("dbo.Customers", "Balance", c => c.Int(nullable: false));
+            DropColumn("dbo.MenuItems", "ItemPicture");
         }
     }
 }

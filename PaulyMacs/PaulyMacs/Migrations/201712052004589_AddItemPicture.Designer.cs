@@ -7,13 +7,13 @@ namespace PaulyMacs.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class AddItemPicture : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddItemPicture));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712012033052_InitialCreate"; }
+            get { return "201712052004589_AddItemPicture"; }
         }
         
         string IMigrationMetadata.Source

@@ -8,7 +8,8 @@ namespace PaulyMacs.Models
 {
     public class Customer
     {
-        public int Id { get; set; }
+        [Key]
+        public int CustomerId { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -25,7 +26,7 @@ namespace PaulyMacs.Models
         public string EmailAddress { get; set; }
 
         [DataType(DataType.Currency)]
-        public double Balance { get; set; }
+        public double BalanceOwed { get; set; }
 
     }
 }

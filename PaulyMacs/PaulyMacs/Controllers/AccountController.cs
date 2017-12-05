@@ -165,7 +165,7 @@ namespace PaulyMacs.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    var customer = new Customer { FirstName = model.FirstName, LastName = model.LastName, EmailAddress = model.Email, PhoneNumber = model.PhoneNumber, Balance = 0.00 };
+                    var customer = new Customer { FirstName = model.FirstName, LastName = model.LastName, EmailAddress = model.Email, PhoneNumber = model.PhoneNumber, BalanceOwed = 0.00 };
                     db.Customers.Add(customer);
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");

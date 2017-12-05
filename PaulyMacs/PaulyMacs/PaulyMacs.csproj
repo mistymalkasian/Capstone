@@ -195,6 +195,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
@@ -206,36 +208,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712012033052_InitialCreate.cs" />
-    <Compile Include="Migrations\201712012033052_InitialCreate.Designer.cs">
-      <DependentUpon>201712012033052_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201712051745135_Initial.cs" />
+    <Compile Include="Migrations\201712051745135_Initial.Designer.cs">
+      <DependentUpon>201712051745135_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712012105151_AddedCustomerModel.cs" />
-    <Compile Include="Migrations\201712012105151_AddedCustomerModel.Designer.cs">
-      <DependentUpon>201712012105151_AddedCustomerModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712012108128_AddedEmployeeModel.cs" />
-    <Compile Include="Migrations\201712012108128_AddedEmployeeModel.Designer.cs">
-      <DependentUpon>201712012108128_AddedEmployeeModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712012116275_AddedOrderModel.cs" />
-    <Compile Include="Migrations\201712012116275_AddedOrderModel.Designer.cs">
-      <DependentUpon>201712012116275_AddedOrderModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712012136160_AddedRatingsandMenuModels.cs" />
-    <Compile Include="Migrations\201712012136160_AddedRatingsandMenuModels.Designer.cs">
-      <DependentUpon>201712012136160_AddedRatingsandMenuModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712041354257_UpdatedModels.cs" />
-    <Compile Include="Migrations\201712041354257_UpdatedModels.Designer.cs">
-      <DependentUpon>201712041354257_UpdatedModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712041452514_UpdatedDataAnnotations.cs" />
-    <Compile Include="Migrations\201712041452514_UpdatedDataAnnotations.Designer.cs">
-      <DependentUpon>201712041452514_UpdatedDataAnnotations.cs</DependentUpon>
+    <Compile Include="Migrations\201712052004589_AddItemPicture.cs" />
+    <Compile Include="Migrations\201712052004589_AddItemPicture.Designer.cs">
+      <DependentUpon>201712052004589_AddItemPicture.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\EmailForm.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -246,6 +230,7 @@
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\ViewModels\CartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -257,6 +242,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\crepe.jpeg" />
+    <Content Include="Images\Inside pic.jpeg" />
+    <Content Include="Images\Inside pic2.jpeg" />
+    <Content Include="Images\Meat skewers.jpeg" />
+    <Content Include="Images\Outside pic.jpeg" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -264,6 +254,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -339,14 +333,13 @@
     <Content Include="Views\Customers\ShoppingCart.cshtml" />
     <Content Include="Views\Customers\ConfirmationPage.cshtml" />
     <Content Include="Views\Customers\RateService.cshtml" />
-    <Content Include="Views\Manage\AddMenuItem.cshtml" />
     <Content Include="Views\Employees\OpenOrders.cshtml" />
     <Content Include="Views\Employees\CompletedOrder.cshtml" />
     <Content Include="Views\Home\Sent.cshtml" />
-    <Content Include="Views\Employees\TextSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -357,26 +350,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712012033052_InitialCreate.resx">
-      <DependentUpon>201712012033052_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712051745135_Initial.resx">
+      <DependentUpon>201712051745135_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712012105151_AddedCustomerModel.resx">
-      <DependentUpon>201712012105151_AddedCustomerModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712012108128_AddedEmployeeModel.resx">
-      <DependentUpon>201712012108128_AddedEmployeeModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712012116275_AddedOrderModel.resx">
-      <DependentUpon>201712012116275_AddedOrderModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712012136160_AddedRatingsandMenuModels.resx">
-      <DependentUpon>201712012136160_AddedRatingsandMenuModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712041354257_UpdatedModels.resx">
-      <DependentUpon>201712041354257_UpdatedModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712041452514_UpdatedDataAnnotations.resx">
-      <DependentUpon>201712041452514_UpdatedDataAnnotations.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712052004589_AddItemPicture.resx">
+      <DependentUpon>201712052004589_AddItemPicture.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

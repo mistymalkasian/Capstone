@@ -57,7 +57,7 @@ namespace PaulyMacs.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id = new SelectList(db.Customers, "Id", "FirstName", rating.Id);
+            ViewBag.Id = new SelectList(db.Customers, "Id", "FirstName", rating.RatingId);
             return View(rating);
         }
 
@@ -73,7 +73,7 @@ namespace PaulyMacs.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.Customers, "Id", "FirstName", rating.Id);
+            ViewBag.Id = new SelectList(db.Customers, "Id", "FirstName", rating.RatingId);
             return View(rating);
         }
 
@@ -90,7 +90,7 @@ namespace PaulyMacs.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.Customers, "Id", "FirstName", rating.Id);
+            ViewBag.Id = new SelectList(db.Customers, "Id", "FirstName", rating.RatingId);
             return View(rating);
         }
 
