@@ -9,5 +9,6 @@ namespace PaulyMacs.Areas.Admin.Models
     public class Db : DbContext
     {
         public DbSet<Pages> Pages { get; set; }
+        public DbSet<Sidebar> Sidebar { get; set; }
     }
 }

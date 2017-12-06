@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PaulyMacs.Areas.Admin.Models;
+using PaulyMacs.Areas.Admin.ViewModels;
 
 namespace PaulyMacs.Areas.Admin.Controllers
 {
@@ -218,5 +219,26 @@ namespace PaulyMacs.Areas.Admin.Controllers
                 }
             }
         }
+
+        // GET: Admin/Pages/EditSidebar/id
+
+        public ActionResult EditSidebar(int id)
+        {
+            SidebarViewModel model;
+
+            using (Db db = new Db())
+            {
+                Sidebar sidebar = db.Sidebar.Find(1);
+
+                model = new SidebarViewModel(sidebar);
+            }
+
+                return View(model);
+        }
+
+
+
+
+
     }
 }
