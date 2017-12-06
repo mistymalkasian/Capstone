@@ -49,9 +49,9 @@ namespace PaulyMacs.Areas.Admin.Controllers
             {
                 string slug;
 
-                Pages pages = new Pages();
+                Pages page = new Pages();
 
-                pages.Title = model.Title;
+                page.Title = model.Title;
 
                 if(string.IsNullOrWhiteSpace(model.Slug))
                 {
@@ -60,12 +60,48 @@ namespace PaulyMacs.Areas.Admin.Controllers
                 }
                 else
                 {
-
+                    slug = model.Slug.Replace(" ", "-").ToLower();
                 }
+
+                if (db.Pages.Any(x => x.Title == model.Title) || db.Pages.Any(x => x.Slug == slug))
+                {
+
+                    ModelState.AddModelError("", "That title or slug already exists.");
+                    return View(model);
+                }
+
+                page.Slug = slug;
+                page.Body = model.Body;
+                page.HasSidebar = model.HasSidebar;
+                page.Sorting = 100;
+
+                db.Pages.Add(page);
+                db.SaveChanges();
             }
 
+            TempData["SuccessMessage"] = "You have added a new page.";
+            return RedirectToAction("AddPage");
+        }
 
-                return View();
+        // GET: Admin/Pages/EditPage/id
+
+        public ActionResult EditPage(int id)
+        {
+            PageViewModel model;
+
+            using (Db db = new Db())
+            {
+                Pages page = db.Pages.Find(id);
+
+                if (page == null)
+                {
+                    return Content("The page does not exist.");
+                }
+
+                model = new PageViewModel(page);
+            }
+
+                return View(model);
         }
     }
 }
