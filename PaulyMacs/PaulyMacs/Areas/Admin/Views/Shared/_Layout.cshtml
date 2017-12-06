@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Pauly Mac's at Four Lakes</title>
+    <title>@ViewBag.Title - Admin Area</title>
       
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -18,14 +18,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Pauly Mac's at Four Lakes", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <img src="~/Content/Images/meat.png" class="img-center" height="70" width="50" /> 
+                <a href="/admin/dashboard" class="navbar-brand">Dashboard</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                <ul class="navbar-right">
+                    <li><a href="/" class="navbar-brand" target="_blank">Pauly Mac's</a></li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -39,8 +38,7 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/scripts")
     @RenderSection("scripts", required: false)
 </body>
 </html>
