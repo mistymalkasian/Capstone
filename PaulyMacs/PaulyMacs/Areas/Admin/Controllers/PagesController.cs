@@ -85,6 +85,8 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
         // GET: Admin/Pages/EditPage/id
 
+        [HttpGet]
+
         public ActionResult EditPage(int id)
         {
             PageViewModel model;
@@ -102,6 +104,58 @@ namespace PaulyMacs.Areas.Admin.Controllers
             }
 
                 return View(model);
+        }
+
+
+        // GET: Admin/Pages/EditPage/id
+
+        [HttpPost]
+
+        public ActionResult EditPage(PageViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (Db db = new Models.Db())
+            {
+                int id = model.PagesId;
+
+                string slug = "home";
+
+                Pages page = db.Pages.Find(id);
+
+                page.Title = model.Title;
+
+                if (model.Slug != "home")
+                {
+                    if (string.IsNullOrWhiteSpace(model.Slug))
+                    {
+                        slug = model.Title.Replace(" ", "-").ToLower();
+                    }
+                    else
+                    {
+                        slug = model.Slug.Replace(" ", "-").ToLower();
+                    }
+                }
+
+                if (db.Pages.Where(x => x.PagesId != id).Any(x => x.Title == model.Title) ||
+                   db.Pages.Where(x => x.PagesId != id).Any(x => x.Slug == slug))
+                {
+                    ModelState.AddModelError("", "That title or slug already exists.");
+                    return View(model);
+                }
+
+                page.Slug = slug;
+                page.Body = model.Body;
+                page.HasSidebar = model.HasSidebar;
+                db.SaveChanges();
+            }
+
+            TempData["SuccessMessage"] = "Success! You have edited the page.";
+
+                return RedirectToAction("EditPage");
         }
     }
 }
