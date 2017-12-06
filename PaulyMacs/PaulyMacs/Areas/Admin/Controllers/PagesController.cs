@@ -157,5 +157,30 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
                 return RedirectToAction("EditPage");
         }
+
+
+        // GET: Admin/Pages/PageDetails/id
+
+        public ActionResult PageDetails(int id)
+        {
+
+            PageViewModel model;
+
+            using (Db db = new Db())
+            {
+                Pages page = db.Pages.Find(id);
+
+                if (page == null)
+                {
+                    return Content("The page does not exist.");
+                }
+
+                model = new PageViewModel(page);
+            }
+
+            return View(model);
+        }
+
+
     }
 }
