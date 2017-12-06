@@ -182,5 +182,41 @@ namespace PaulyMacs.Areas.Admin.Controllers
         }
 
 
+        // GET: Admin/Pages/DeletePage/id
+        public ActionResult DeletePage(int id)
+        {
+            using (Db db = new Db())
+            {
+                Pages page = db.Pages.Find(id);
+
+                db.Pages.Remove(page);
+
+                db.SaveChanges();         
+                    
+            }
+                return RedirectToAction("Index");
+        }
+
+
+        // GET: Admin/Pages/ReorderPages
+        [HttpPost]
+        public void ReorderPages(int[] id)
+        {
+            using (Db db = new Db())
+            {
+                int count = 1;
+                Pages page;
+
+                foreach(var pageId in id)
+                {
+                    page = db.Pages.Find(pageId);
+                    page.Sorting = count;
+
+                    db.SaveChanges();
+
+                    count++;
+                }
+            }
+        }
     }
 }

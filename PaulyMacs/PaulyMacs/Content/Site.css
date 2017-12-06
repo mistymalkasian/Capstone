@@ -1,4 +1,13 @@
-﻿/*body {
+﻿
+table.sorting tr:not(.home){
+    cursor: pointer;
+}
+
+.ui-state-highlight{
+    border: 1px dashed #ccc;
+}
+
+/*body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
