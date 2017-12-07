@@ -52,5 +52,45 @@ namespace PaulyMacs.Areas.Admin.Controllers
             return id;
         }
 
+
+        // POST: Admin/Shop/ReorderCategories
+
+        [HttpPost]
+        public void ReorderCategories(int[] id)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                int count = 1;
+                Category category;
+
+                foreach (var catId in id)
+                {
+                    category = db.Categories.Find(catId);
+                    category.Sorting = count;
+
+                    db.SaveChanges();
+
+                    count++;
+                }
+            }
+        }
+
+
+        // GET: Admin/Shop/DeleteCategory/id
+        public ActionResult DeleteCategory(int id)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                Category category = db.Categories.Find(id);
+
+                db.Categories.Remove(category);
+
+                db.SaveChanges();
+
+            }
+            return RedirectToAction("Categories");
+        }
+
+
     }
 }

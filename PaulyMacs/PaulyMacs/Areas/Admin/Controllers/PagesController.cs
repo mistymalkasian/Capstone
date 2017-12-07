@@ -200,7 +200,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         }
 
 
-        // GET: Admin/Pages/ReorderPages
+        // POST: Admin/Pages/ReorderPages
         [HttpPost]
         public void ReorderPages(int[] id)
         {
