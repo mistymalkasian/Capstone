@@ -229,6 +229,22 @@
     <Compile Include="Migrations\201712061539295_AddedNewTable.Designer.cs">
       <DependentUpon>201712061539295_AddedNewTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712062158081_CreatedNewTable.cs" />
+    <Compile Include="Migrations\201712062158081_CreatedNewTable.Designer.cs">
+      <DependentUpon>201712062158081_CreatedNewTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712062201454_StuffAndThings.cs" />
+    <Compile Include="Migrations\201712062201454_StuffAndThings.Designer.cs">
+      <DependentUpon>201712062201454_StuffAndThings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712062216073_blah.cs" />
+    <Compile Include="Migrations\201712062216073_blah.Designer.cs">
+      <DependentUpon>201712062216073_blah.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712070043030_Updated.cs" />
+    <Compile Include="Migrations\201712070043030_Updated.Designer.cs">
+      <DependentUpon>201712070043030_Updated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -379,6 +395,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712061539295_AddedNewTable.resx">
       <DependentUpon>201712061539295_AddedNewTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712062158081_CreatedNewTable.resx">
+      <DependentUpon>201712062158081_CreatedNewTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712062201454_StuffAndThings.resx">
+      <DependentUpon>201712062201454_StuffAndThings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712062216073_blah.resx">
+      <DependentUpon>201712062216073_blah.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712070043030_Updated.resx">
+      <DependentUpon>201712070043030_Updated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

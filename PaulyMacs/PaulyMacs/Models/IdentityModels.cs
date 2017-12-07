@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using PaulyMacs.Areas.Admin.Models;
 
 namespace PaulyMacs.Models
 {
@@ -25,7 +26,11 @@ namespace PaulyMacs.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
-        
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Pages> Pages { get; set; }
+        public DbSet<Sidebar> Sidebar { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

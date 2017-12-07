@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using PaulyMacs.Areas.Admin.Models;
 using PaulyMacs.Areas.Admin.ViewModels;
+using PaulyMacs.Models;
 
 namespace PaulyMacs.Areas.Admin.Controllers
 {
@@ -17,7 +18,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         {
             List<PageViewModel> PagesList;
 
-            using (Db Db = new Db())
+            using (ApplicationDbContext Db = new ApplicationDbContext())
             {
                 PagesList = Db.Pages.ToArray().OrderBy(x => x.Sorting).Select(x => new PageViewModel(x)).ToList();
             }
@@ -46,7 +47,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
                 return View(model);
             }
 
-            using (Db db = new Models.Db())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 string slug;
 
@@ -92,7 +93,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         {
             PageViewModel model;
 
-            using (Db db = new Db())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 Pages page = db.Pages.Find(id);
 
@@ -119,7 +120,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
                 return View(model);
             }
 
-            using (Db db = new Models.Db())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 int id = model.PagesId;
 
@@ -167,7 +168,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
             PageViewModel model;
 
-            using (Db db = new Db())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 Pages page = db.Pages.Find(id);
 
@@ -186,7 +187,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         // GET: Admin/Pages/DeletePage/id
         public ActionResult DeletePage(int id)
         {
-            using (Db db = new Db())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 Pages page = db.Pages.Find(id);
 
@@ -203,7 +204,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         [HttpPost]
         public void ReorderPages(int[] id)
         {
-            using (Db db = new Db())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 int count = 1;
                 Pages page;
@@ -222,11 +223,12 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
         // GET: Admin/Pages/EditSidebar/id
 
+       [HttpGet]
         public ActionResult EditSidebar(int id)
         {
             SidebarViewModel model;
 
-            using (Db db = new Db())
+            using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 Sidebar sidebar = db.Sidebar.Find(1);
 
@@ -234,6 +236,25 @@ namespace PaulyMacs.Areas.Admin.Controllers
             }
 
                 return View(model);
+        }
+
+        // POST: Admin/Pages/EditSidebar
+
+        [HttpPost]
+        public ActionResult EditSidebar(SidebarViewModel model)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                Sidebar sidebar = db.Sidebar.Find(1);
+
+                sidebar.Body = model.Body;
+
+                db.SaveChanges();
+            }
+
+            TempData["SuccessMessage"] = "You have edited the sidebar.";
+
+            return RedirectToAction("EditSidebar");
         }
 
 
