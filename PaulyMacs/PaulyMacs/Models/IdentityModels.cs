@@ -29,7 +29,7 @@ namespace PaulyMacs.Models
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Pages> Pages { get; set; }
-        public DbSet<Sidebar> Sidebar { get; set; }
+        public DbSet<Sidebar> Sidebars { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

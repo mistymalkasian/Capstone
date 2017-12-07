@@ -230,7 +230,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                Sidebar sidebar = db.Sidebar.Find(1);
+                Sidebar sidebar = db.Sidebars.Find(1);
 
                 model = new SidebarViewModel(sidebar);
             }
@@ -245,7 +245,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                Sidebar sidebar = db.Sidebar.Find(1);
+                Sidebar sidebar = db.Sidebars.Find(1);
 
                 sidebar.Body = model.Body;
 
