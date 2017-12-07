@@ -1,4 +1,5 @@
-﻿using PaulyMacs.Models;
+﻿using PaulyMacs.Areas.Admin.Models;
+using PaulyMacs.Models;
 using PaulyMacs.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,5 +23,34 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
                 return View(CategoryVMList);
         }
+
+
+        // POST: Admin/Shop/AddNewCategory
+        [HttpPost]
+        public string AddNewCategory(string catName)
+        {
+
+            string id;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                if (db.Categories.Any(x => x.Name == catName))
+                    return "titletaken";
+
+                Category category = new Category();
+
+                category.Name = catName;
+                category.Slug = catName.Replace(" ", "-").ToLower();
+                category.Sorting = 100;
+
+                db.Categories.Add(category);
+                db.SaveChanges();
+
+                id = category.CategoryId.ToString();
+            }
+
+            return id;
+        }
+
     }
 }
