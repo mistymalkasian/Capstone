@@ -3,10 +3,39 @@ namespace PaulyMacs.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class Cringe : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.CartItems",
+                c => new
+                    {
+                        CartItemId = c.Int(nullable: false, identity: true),
+                        Quantity = c.Int(nullable: false),
+                        ItemPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        CartId = c.Int(nullable: false),
+                        MenuItemId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.CartItemId)
+                .ForeignKey("dbo.Carts", t => t.CartId, cascadeDelete: true)
+                .ForeignKey("dbo.MenuItems", t => t.MenuItemId, cascadeDelete: true)
+                .Index(t => t.CartId)
+                .Index(t => t.MenuItemId);
+            
+            CreateTable(
+                "dbo.Carts",
+                c => new
+                    {
+                        CartId = c.Int(nullable: false, identity: true),
+                        DateCreated = c.DateTime(nullable: false),
+                        isCheckedOut = c.Boolean(nullable: false),
+                        CustomerId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.CartId)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
+                .Index(t => t.CustomerId);
+            
             CreateTable(
                 "dbo.Customers",
                 c => new
@@ -21,6 +50,34 @@ namespace PaulyMacs.Migrations
                 .PrimaryKey(t => t.CustomerId);
             
             CreateTable(
+                "dbo.MenuItems",
+                c => new
+                    {
+                        MenuItemId = c.Int(nullable: false, identity: true),
+                        ItemName = c.String(nullable: false),
+                        Slug = c.String(),
+                        ItemPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ItemDescription = c.String(nullable: false),
+                        CategoryName = c.String(),
+                        ImageName = c.String(),
+                        CategoryId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.MenuItemId)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .Index(t => t.CategoryId);
+            
+            CreateTable(
+                "dbo.Categories",
+                c => new
+                    {
+                        CategoryId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Slug = c.String(),
+                        Sorting = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.CategoryId);
+            
+            CreateTable(
                 "dbo.Employees",
                 c => new
                     {
@@ -31,17 +88,6 @@ namespace PaulyMacs.Migrations
                         EmailAddress = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.EmployeeId);
-            
-            CreateTable(
-                "dbo.MenuItems",
-                c => new
-                    {
-                        MenuItemId = c.Int(nullable: false, identity: true),
-                        ItemName = c.String(nullable: false),
-                        ItemPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        ItemDescription = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.MenuItemId);
             
             CreateTable(
                 "dbo.Orders",
@@ -57,6 +103,19 @@ namespace PaulyMacs.Migrations
                 .PrimaryKey(t => t.OrderId)
                 .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
                 .Index(t => t.CustomerId);
+            
+            CreateTable(
+                "dbo.Pages",
+                c => new
+                    {
+                        PagesId = c.Int(nullable: false, identity: true),
+                        Title = c.String(),
+                        Slug = c.String(),
+                        Body = c.String(),
+                        Sorting = c.Int(nullable: false),
+                        HasSidebar = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.PagesId);
             
             CreateTable(
                 "dbo.Ratings",
@@ -93,6 +152,15 @@ namespace PaulyMacs.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.Sidebars",
+                c => new
+                    {
+                        SidebarId = c.Int(nullable: false, identity: true),
+                        Body = c.String(),
+                    })
+                .PrimaryKey(t => t.SidebarId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -149,6 +217,10 @@ namespace PaulyMacs.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Ratings", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.Orders", "CustomerId", "dbo.Customers");
+            DropForeignKey("dbo.CartItems", "MenuItemId", "dbo.MenuItems");
+            DropForeignKey("dbo.MenuItems", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.CartItems", "CartId", "dbo.Carts");
+            DropForeignKey("dbo.Carts", "CustomerId", "dbo.Customers");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -157,16 +229,25 @@ namespace PaulyMacs.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Ratings", new[] { "CustomerId" });
             DropIndex("dbo.Orders", new[] { "CustomerId" });
+            DropIndex("dbo.MenuItems", new[] { "CategoryId" });
+            DropIndex("dbo.Carts", new[] { "CustomerId" });
+            DropIndex("dbo.CartItems", new[] { "MenuItemId" });
+            DropIndex("dbo.CartItems", new[] { "CartId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Sidebars");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Ratings");
+            DropTable("dbo.Pages");
             DropTable("dbo.Orders");
-            DropTable("dbo.MenuItems");
             DropTable("dbo.Employees");
+            DropTable("dbo.Categories");
+            DropTable("dbo.MenuItems");
             DropTable("dbo.Customers");
+            DropTable("dbo.Carts");
+            DropTable("dbo.CartItems");
         }
     }
 }

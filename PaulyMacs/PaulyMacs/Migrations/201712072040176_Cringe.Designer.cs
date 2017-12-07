@@ -7,13 +7,13 @@ namespace PaulyMacs.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class Cringe : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Cringe));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712051745135_Initial"; }
+            get { return "201712072040176_Cringe"; }
         }
         
         string IMigrationMetadata.Source

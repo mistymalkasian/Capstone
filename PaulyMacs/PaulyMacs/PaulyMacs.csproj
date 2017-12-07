@@ -203,6 +203,7 @@
     <Compile Include="Areas\Admin\Models\Db.cs" />
     <Compile Include="Areas\Admin\Models\Pages.cs" />
     <Compile Include="Areas\Admin\Models\Sidebar.cs" />
+    <Compile Include="Areas\Admin\Views\Shop\MenuItemViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\SidebarViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
@@ -215,41 +216,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712051745135_Initial.cs" />
-    <Compile Include="Migrations\201712051745135_Initial.Designer.cs">
-      <DependentUpon>201712051745135_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712052004589_AddItemPicture.cs" />
-    <Compile Include="Migrations\201712052004589_AddItemPicture.Designer.cs">
-      <DependentUpon>201712052004589_AddItemPicture.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712061448341_AddNewTableCalledPages.cs" />
-    <Compile Include="Migrations\201712061448341_AddNewTableCalledPages.Designer.cs">
-      <DependentUpon>201712061448341_AddNewTableCalledPages.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712061539295_AddedNewTable.cs" />
-    <Compile Include="Migrations\201712061539295_AddedNewTable.Designer.cs">
-      <DependentUpon>201712061539295_AddedNewTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712062158081_CreatedNewTable.cs" />
-    <Compile Include="Migrations\201712062158081_CreatedNewTable.Designer.cs">
-      <DependentUpon>201712062158081_CreatedNewTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712062201454_StuffAndThings.cs" />
-    <Compile Include="Migrations\201712062201454_StuffAndThings.Designer.cs">
-      <DependentUpon>201712062201454_StuffAndThings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712062216073_blah.cs" />
-    <Compile Include="Migrations\201712062216073_blah.Designer.cs">
-      <DependentUpon>201712062216073_blah.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712070043030_Updated.cs" />
-    <Compile Include="Migrations\201712070043030_Updated.Designer.cs">
-      <DependentUpon>201712070043030_Updated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712071456275_AddedCategories.cs" />
-    <Compile Include="Migrations\201712071456275_AddedCategories.Designer.cs">
-      <DependentUpon>201712071456275_AddedCategories.cs</DependentUpon>
+    <Compile Include="Migrations\201712072040176_Cringe.cs" />
+    <Compile Include="Migrations\201712072040176_Cringe.Designer.cs">
+      <DependentUpon>201712072040176_Cringe.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -312,6 +281,7 @@
     <Content Include="Scripts\ckeditor\ckeditor.php" />
     <Content Include="Scripts\ckeditor\ckeditor.pack" />
     <Content Include="Areas\Admin\Views\Shop\Categories.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop\AddMenuItem.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -743,32 +713,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712051745135_Initial.resx">
-      <DependentUpon>201712051745135_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712052004589_AddItemPicture.resx">
-      <DependentUpon>201712052004589_AddItemPicture.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712061448341_AddNewTableCalledPages.resx">
-      <DependentUpon>201712061448341_AddNewTableCalledPages.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712061539295_AddedNewTable.resx">
-      <DependentUpon>201712061539295_AddedNewTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712062158081_CreatedNewTable.resx">
-      <DependentUpon>201712062158081_CreatedNewTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712062201454_StuffAndThings.resx">
-      <DependentUpon>201712062201454_StuffAndThings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712062216073_blah.resx">
-      <DependentUpon>201712062216073_blah.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712070043030_Updated.resx">
-      <DependentUpon>201712070043030_Updated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712071456275_AddedCategories.resx">
-      <DependentUpon>201712071456275_AddedCategories.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712072040176_Cringe.resx">
+      <DependentUpon>201712072040176_Cringe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

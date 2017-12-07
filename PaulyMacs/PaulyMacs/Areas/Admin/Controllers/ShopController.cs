@@ -1,4 +1,5 @@
 ﻿using PaulyMacs.Areas.Admin.Models;
+using PaulyMacs.Areas.Admin.ViewModels;
 using PaulyMacs.Models;
 using PaulyMacs.ViewModels;
 using System;
@@ -110,6 +111,20 @@ namespace PaulyMacs.Areas.Admin.Controllers
             }
 
             return "inconsequentialstring";
+        }
+
+
+        // POST: Admin/Shop/AddMenuItem
+        public ActionResult AddMenuItem()
+        {
+            MenuItemViewModel model = new MenuItemViewModel();
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                model.Categories = new SelectList(db.Categories.ToList(), "CategoryId", "Name");
+            }
+
+                return View(model);
         }
 
     }
