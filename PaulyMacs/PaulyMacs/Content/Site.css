@@ -21,6 +21,10 @@ table.sorting.categories td{
     padding: 20px !important;
 }
 
+.ajaxdivtd {
+    position: absolute;
+}
+
 /*body {
     padding-top: 50px;
     padding-bottom: 20px;

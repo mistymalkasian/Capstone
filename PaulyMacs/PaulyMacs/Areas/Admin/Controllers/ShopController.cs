@@ -92,5 +92,25 @@ namespace PaulyMacs.Areas.Admin.Controllers
         }
 
 
+        // POST: Admin/Shop/RenameCategory/id
+        [HttpPost]
+        public string RenameCategory(string newCatName, int id)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                if (db.Categories.Any(x => x.Name == newCatName))
+                    return "titletaken";
+                
+                Category category = db.Categories.Find(id);
+
+                category.Name = newCatName;
+                category.Slug = newCatName.Replace(" ", "-").ToLower();
+
+                db.SaveChanges();
+            }
+
+            return "inconsequentialstring";
+        }
+
     }
 }
