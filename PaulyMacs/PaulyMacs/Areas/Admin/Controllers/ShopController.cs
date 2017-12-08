@@ -4,8 +4,10 @@ using PaulyMacs.Models;
 using PaulyMacs.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace PaulyMacs.Areas.Admin.Controllers
@@ -114,7 +116,8 @@ namespace PaulyMacs.Areas.Admin.Controllers
         }
 
 
-        // POST: Admin/Shop/AddMenuItem
+        // GET: Admin/Shop/AddMenuItem
+        [HttpGet]
         public ActionResult AddMenuItem()
         {
             MenuItemViewModel model = new MenuItemViewModel();
@@ -127,5 +130,124 @@ namespace PaulyMacs.Areas.Admin.Controllers
                 return View(model);
         }
 
+        // POST: Admin/Shop/AddMenuItem
+        [HttpPost]
+        public ActionResult AddMenuItem(MenuItemViewModel model, HttpPostedFileBase file)
+        {
+            if (!ModelState.IsValid)
+            {
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    model.Categories = new SelectList(db.Categories.ToList(), "CategoryId", "Name");
+                    return View(model);
+                }
+            }
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                if (db.MenuItems.Any(x => x.ItemName == model.ItemName))
+                {
+                    model.Categories = new SelectList(db.Categories.ToList(), "CategoryId", "Name");
+                    ModelState.AddModelError("", "That menu item name is taken.");
+                }
+
+                return View(model);
+            }
+
+            int id;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+
+                MenuItem item = new MenuItem();
+
+                item.ItemName = model.ItemName;
+                item.Slug = model.ItemName.Replace(" ", "-").ToLower();
+                item.ItemDescription = model.ItemDescription;
+                item.ItemPrice = model.ItemPrice;
+                item.CategoryId = model.CategoryId;
+
+                Category category = db.Categories.FirstOrDefault(x => x.CategoryId == model.CategoryId);
+                item.CategoryName = category.Name;
+
+                db.MenuItems.Add(item);
+                db.SaveChanges();
+
+                id = item.MenuItemId;
+            }
+
+            TempData["SuccessMessage"] = "You have successfully added an item to the menu!";
+
+            #region Upload Image
+
+            var originalDirectory = new DirectoryInfo(string.Format("(0)Images\\Uploads", Server.MapPath(@"\")));
+
+            var pathString1 = Path.Combine(originalDirectory.ToString(), "MenuItems");
+            var pathString2 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString());
+            var pathString3 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString() + "\\Thumbs");
+            var pathString4 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString() + "\\Gallery");
+            var pathString5 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString() + "\\Gallery\\Thumbs");
+
+
+            if (!Directory.Exists(pathString1))
+                Directory.CreateDirectory(pathString1);
+
+            if (!Directory.Exists(pathString2))
+                Directory.CreateDirectory(pathString2);
+
+            if (!Directory.Exists(pathString3))
+                Directory.CreateDirectory(pathString3);
+
+            if (!Directory.Exists(pathString4))
+                Directory.CreateDirectory(pathString4);
+
+            if (!Directory.Exists(pathString5))
+                Directory.CreateDirectory(pathString5);
+
+            if (file != null && file.ContentLength > 0)
+            {
+                string ext = file.ContentType.ToLower();
+
+                if (ext != "image/jpg" &&
+                    ext != "image/jpeg" &&
+                    ext != "image/pjpeg" &&
+                    ext != "image/gif" &&
+                    ext != "image/x-png" &&
+                    ext != "image/png")
+                {
+                    using (ApplicationDbContext db = new ApplicationDbContext())
+                    {
+                        model.Categories = new SelectList(db.Categories.ToList(), "MenuItemId", "ItemName");
+                        ModelState.AddModelError("", "The image was not uploaded - wrong image extension.");
+                        return View(model);
+                    }
+                }
+
+                string imageName = file.FileName;
+
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    MenuItem item = db.MenuItems.Find(id);
+
+                    item.ImageName = imageName;
+
+                    db.SaveChanges();
+                }
+
+                var path = string.Format("{0}\\{1}", pathString2, imageName);
+                var path2 = string.Format("{0}\\{1}", pathString3, imageName);
+
+                file.SaveAs(path);
+
+                WebImage img = new WebImage(file.InputStream);
+                img.Resize(200, 200);
+                img.Save(path2);
+            }
+
+            #endregion
+
+            return RedirectToAction("AddMenuItem");
+        }
     }
 }
+
