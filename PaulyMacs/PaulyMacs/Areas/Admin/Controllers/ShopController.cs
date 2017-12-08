@@ -179,73 +179,73 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
             TempData["SuccessMessage"] = "You have successfully added an item to the menu!";
 
-            //#region Upload Image
+            #region Upload Image
 
-            //var originalDirectory = new DirectoryInfo(string.Format("(0)Images\\Uploads", Server.MapPath(@"\")));
+            var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Uploads", Server.MapPath(@"\")));
 
-            //var pathString1 = Path.Combine(originalDirectory.ToString(), "MenuItems");
-            //var pathString2 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString());
-            //var pathString3 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString() + "\\Thumbs");
-            //var pathString4 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString() + "\\Gallery");
-            //var pathString5 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString() + "\\Gallery\\Thumbs");
+            var pathString1 = Path.Combine(originalDirectory.ToString(), "MenuItems");
+            var pathString2 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString());
+            var pathString3 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString() + "\\Thumbs");
+            var pathString4 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString() + "\\Gallery");
+            var pathString5 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString() + "\\Gallery\\Thumbs");
 
 
-            //if (!Directory.Exists(pathString1))
-            //    Directory.CreateDirectory(pathString1);
+            if (!Directory.Exists(pathString1))
+                Directory.CreateDirectory(pathString1);
 
-            //if (!Directory.Exists(pathString2))
-            //    Directory.CreateDirectory(pathString2);
+            if (!Directory.Exists(pathString2))
+                Directory.CreateDirectory(pathString2);
 
-            //if (!Directory.Exists(pathString3))
-            //    Directory.CreateDirectory(pathString3);
+            if (!Directory.Exists(pathString3))
+                Directory.CreateDirectory(pathString3);
 
-            //if (!Directory.Exists(pathString4))
-            //    Directory.CreateDirectory(pathString4);
+            if (!Directory.Exists(pathString4))
+                Directory.CreateDirectory(pathString4);
 
-            //if (!Directory.Exists(pathString5))
-            //    Directory.CreateDirectory(pathString5);
+            if (!Directory.Exists(pathString5))
+                Directory.CreateDirectory(pathString5);
 
-            //if (file != null && file.ContentLength > 0)
-            //{
-            //    string ext = file.ContentType.ToLower();
+            if (file != null && file.ContentLength > 0)
+            {
+                string ext = file.ContentType.ToLower();
 
-            //    if (ext != "image/jpg" &&
-            //        ext != "image/jpeg" &&
-            //        ext != "image/pjpeg" &&
-            //        ext != "image/gif" &&
-            //        ext != "image/x-png" &&
-            //        ext != "image/png")
-            //    {
-            //        using (ApplicationDbContext db = new ApplicationDbContext())
-            //        {
-            //            model.Categories = new SelectList(db.Categories.ToList(), "MenuItemId", "ItemName");
-            //            ModelState.AddModelError("", "The image was not uploaded - wrong image extension.");
-            //            return View(model);
-            //        }
-            //    }
+                if (ext != "image/jpg" &&
+                    ext != "image/jpeg" &&
+                    ext != "image/pjpeg" &&
+                    ext != "image/gif" &&
+                    ext != "image/x-png" &&
+                    ext != "image/png")
+                {
+                    using (ApplicationDbContext db = new ApplicationDbContext())
+                    {
+                        model.Categories = new SelectList(db.Categories.ToList(), "CategoryId", "Name");
+                        ModelState.AddModelError("", "The image was not uploaded - wrong image extension.");
+                        return View(model);
+                    }
+                }
 
-            //    string imageName = file.FileName;
+                string imageName = file.FileName;
 
-            //    using (ApplicationDbContext db = new ApplicationDbContext())
-            //    {
-            //        MenuItem item = db.MenuItems.Find(id);
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    MenuItem item = db.MenuItems.Find(id);
 
-            //        item.ImageName = imageName;
+                    item.ImageName = imageName;
 
-            //        db.SaveChanges();
-            //    }
+                    db.SaveChanges();
+                }
 
-            //    var path = string.Format("{0}\\{1}", pathString2, imageName);
-            //    var path2 = string.Format("{0}\\{1}", pathString3, imageName);
+                var path = string.Format("{0}\\{1}", pathString2, imageName);
+                var path2 = string.Format("{0}\\{1}", pathString3, imageName);
 
-            //    file.SaveAs(path);
+                file.SaveAs(path);
 
-            //    WebImage img = new WebImage(file.InputStream);
-            //    img.Resize(200, 200);
-            //    img.Save(path2);
-            //}
+                WebImage img = new WebImage(file.InputStream);
+                img.Resize(200, 200);
+                img.Save(path2);
+            }
 
-            //#endregion
+            #endregion
 
             return RedirectToAction("AddMenuItem");
         }
