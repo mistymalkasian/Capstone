@@ -56,6 +56,7 @@ namespace PaulyMacs.Areas.Admin.ViewModels
         public Category Category { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; }
+
         public IEnumerable<string> GalleryImages { get; set; }
     }
 }
