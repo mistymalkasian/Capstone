@@ -1,0 +1,86 @@
+﻿@model IEnumerable<PaulyMacs.Areas.Admin.ViewModels.MenuItemViewModel>
+
+@{
+    ViewBag.Title = "Menu Items";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+@using PagedList.Mvc;
+@using PagedList;
+
+
+
+<h2>Menu Items</h2>
+
+<select id="SelectedCategory" name="SelectedCategory">
+    <option value="0">All</option>
+    @foreach (var item in ViewBag.Categories)
+    {
+        if(ViewBag.SelectedCat == item.Value)
+        {
+            <option selected="selected" value="item.Value">@item.Text</option>
+        }
+        else
+        {
+            <option value="item.Value">@item.Text</option>
+        }
+    }
+</select>
+
+<br />
+<br />
+
+<p>
+    @Html.ActionLink("Add New Menu Item", "AddMenuItem")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Photo
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.OnePageOfProducts)
+    {
+        <tr>
+            <td>
+                @item.ItemName
+            </td>
+            <td>
+                @item.ItemDescription
+            </td>
+            <td>
+                $@item.ItemPrice
+            </td>
+            <td>
+                <a href="/admin/shop/EditMenuItem/@item.MenuItemId">
+                    <img src="~/Images/Uploads/MenuItems/@item.MenuItemId/Thumbs/@item.ImageName" />
+                </a>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditMenuItem", new { id = item.MenuItemId }) |
+                @Html.ActionLink("Delete", "DeleteMenuItem", new { id = item.MenuItemId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("MenuItems", new { page, catId = ViewBag.SelectedCat }))

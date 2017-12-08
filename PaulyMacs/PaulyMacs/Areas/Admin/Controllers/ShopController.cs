@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using PagedList;
 
 namespace PaulyMacs.Areas.Admin.Controllers
 {
@@ -248,6 +249,33 @@ namespace PaulyMacs.Areas.Admin.Controllers
             #endregion
 
             return RedirectToAction("AddMenuItem");
+        }
+
+
+        //POST: Admin/Shop/MenuItems
+        public ActionResult MenuItems(int? page, int? catId)
+        {
+            List<MenuItemViewModel> listOfItemVM;
+
+            var pageNumber = page ?? 1;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                listOfItemVM = db.MenuItems.ToArray()
+                              .Where(x => catId == null || catId == 0 || x.CategoryId == catId)
+                              .Select(x => new MenuItemViewModel(x))
+                              .ToList();
+
+                ViewBag.Categories = new SelectList(db.Categories.ToList(), "CategoryId", "Name");
+
+                ViewBag.SelectedCat = catId.ToString();
+            }
+
+            var onePageOfProducts = listOfItemVM.ToPagedList(pageNumber, 3);
+
+            ViewBag.OnePageOfProducts = onePageOfProducts;
+
+            return View(listOfItemVM);
         }
     }
 }
