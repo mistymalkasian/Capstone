@@ -252,7 +252,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         }
 
 
-        //POST: Admin/Shop/MenuItems
+        //GET: Admin/Shop/MenuItems
         public ActionResult MenuItems(int? page, int? catId)
         {
             List<MenuItemViewModel> listOfItemVM;
@@ -276,6 +276,168 @@ namespace PaulyMacs.Areas.Admin.Controllers
             ViewBag.OnePageOfProducts = onePageOfProducts;
 
             return View(listOfItemVM);
+        }
+
+
+        //GET: Admin/Shop/EditMenuItem/id
+        [HttpGet]
+        public ActionResult EditMenuItem(int id)
+        {
+            MenuItemViewModel model;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+
+                MenuItem item = db.MenuItems.Find(id);
+
+                if(item == null)
+                {
+                    return Content("That item does not exist.");
+                }
+
+                model = new MenuItemViewModel(item);
+
+                model.Categories = new SelectList(db.Categories.ToList(), "CategoryId", "Name");
+
+                model.GalleryImages = Directory.EnumerateFiles(Server.MapPath("~/Images/Uploads/MenuItems/" + id + "/Gallery/Thumbs"))
+                                               .Select(fn => Path.GetFileName(fn));
+
+           
+            }
+
+                return View(model);
+        }
+
+
+        //POST: Admin/Shop/EditMenuItem/id
+        [HttpPost]
+        public ActionResult EditMenuItem(MenuItemViewModel model, HttpPostedFileBase file)
+        {
+            int id = model.MenuItemId;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                model.Categories = new SelectList(db.Categories.ToList(), "CategoryId", "Name");
+            }
+            model.GalleryImages = Directory.EnumerateFiles(Server.MapPath("~/Images/Uploads/MenuItems/" + id + "/Gallery/Thumbs"))
+                                              .Select(fn => Path.GetFileName(fn));
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                if (db.MenuItems.Where(x => x.MenuItemId != id).Any(x => x.ItemName == model.ItemName))
+                {
+                    ModelState.AddModelError("", "That item name is taken.");
+                    return View(model);
+                }
+            }
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                MenuItem item = db.MenuItems.Find(id);
+
+                item.ItemName = model.ItemName;
+                item.Slug = model.ItemName.Replace(" ", "-").ToLower();
+                item.ItemDescription = model.ItemDescription;
+                item.ItemPrice = model.ItemPrice;
+                item.CategoryId = model.CategoryId;
+                item.ImageName = model.ImageName;
+
+                Category catDTO = db.Categories.FirstOrDefault(x => x.CategoryId == model.CategoryId);
+                item.CategoryName = catDTO.Name;
+
+                db.SaveChanges();
+
+            }
+
+            TempData["SuccessMessage"] = "You have successfully edited the menu item!";
+
+            #region Image Upload
+
+            if (file != null && file.ContentLength > 0)
+            {
+                string ext = file.ContentType.ToLower();
+
+                if (ext != "image/jpg" &&
+                   ext != "image/jpeg" &&
+                   ext != "image/pjpeg" &&
+                   ext != "image/gif" &&
+                   ext != "image/x-png" &&
+                   ext != "image/png"
+                    )
+                {
+                    using (ApplicationDbContext db = new ApplicationDbContext())
+                    {
+                        ModelState.AddModelError("", "The image was not uploaded - wrong image extension.");
+                        return View(model);
+                    }
+                }
+
+
+                var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Uploads", Server.MapPath(@"\")));
+
+
+                var pathString1 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString());
+                var pathString2 = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString() + "\\Thumbs");
+
+                DirectoryInfo di1 = new DirectoryInfo(pathString1);
+                DirectoryInfo di2 = new DirectoryInfo(pathString2);
+
+                foreach (FileInfo file2 in di1.GetFiles())
+                    file2.Delete();
+
+                foreach (FileInfo file3 in di2.GetFiles())
+                    file3.Delete();
+
+                string imageName = file.FileName;
+
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    MenuItem item = db.MenuItems.Find(id);
+                    item.ImageName = imageName;
+
+                    db.SaveChanges();
+                }
+
+                var path = string.Format("{0}\\{1}", pathString1, imageName);
+                var path2 = string.Format("{0}\\{1}", pathString2, imageName);
+
+                file.SaveAs(path);
+
+                WebImage img = new WebImage(file.InputStream);
+                img.Resize(200, 200);
+                img.Save(path2);
+
+            }
+
+            #endregion
+
+            return RedirectToAction("EditMenuItem");
+        }
+
+
+       public ActionResult DeleteMenuItem(int id)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                MenuItem item = db.MenuItems.Find(id);
+                db.MenuItems.Remove(item);
+
+                db.SaveChanges();
+            }
+
+            var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Uploads", Server.MapPath(@"\")));
+
+            string pathString = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString());
+
+            if (Directory.Exists(pathString))
+                Directory.Delete(pathString);
+
+            return RedirectToAction("MenuItems");
         }
     }
 }

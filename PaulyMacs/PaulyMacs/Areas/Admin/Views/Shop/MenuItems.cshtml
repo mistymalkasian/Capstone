@@ -17,17 +17,17 @@
 
 <h2>Menu Items</h2>
 
-<select id="SelectedCategory" name="SelectedCategory">
+<select id="SelectCategory" name="SelectCategory">
     <option value="0">All</option>
     @foreach (var item in ViewBag.Categories)
     {
         if(ViewBag.SelectedCat == item.Value)
         {
-            <option selected="selected" value="item.Value">@item.Text</option>
+            <option selected="selected" value="@item.Value">@item.Text</option>
         }
         else
         {
-            <option value="item.Value">@item.Text</option>
+            <option value="@item.Value">@item.Text</option>
         }
     }
 </select>
@@ -84,3 +84,44 @@
 </table>
 
 @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("MenuItems", new { page, catId = ViewBag.SelectedCat }))
+
+@section Scripts{
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+
+    <script>
+
+        $(function () {
+
+            //select products from specified category
+
+            $("#SelectCategory").on("change", function () {
+
+                var url = $(this).val();
+
+                if (url) {
+                    window.location = "/admin/shop/MenuItems?catId=" + url;
+                }
+                return false;              
+            });
+
+
+            //////////////////////////////////////////
+
+
+
+            //confirm page deletion
+
+
+            $("a.delete").click(function () {
+
+                if (!confirm("Confirm page deletion")) return false;
+            });
+
+
+/////////////////////////////////////
+
+        });
+
+    </script>
+
+}

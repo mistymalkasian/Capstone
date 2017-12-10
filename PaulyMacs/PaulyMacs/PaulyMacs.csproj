@@ -292,6 +292,7 @@
     <Content Include="Areas\Admin\Views\Shop\Categories.cshtml" />
     <Content Include="Areas\Admin\Views\Shop\AddMenuItem.cshtml" />
     <Content Include="Areas\Admin\Views\Shop\MenuItems.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop\EditMenuItem.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />
