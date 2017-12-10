@@ -435,7 +435,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
             string pathString = Path.Combine(originalDirectory.ToString(), "MenuItems\\" + id.ToString());
 
             if (Directory.Exists(pathString))
-                Directory.Delete(pathString);
+                Directory.Delete(pathString, true);
 
             return RedirectToAction("MenuItems");
         }
