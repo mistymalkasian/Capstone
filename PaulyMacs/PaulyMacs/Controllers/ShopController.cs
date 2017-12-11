@@ -4,6 +4,7 @@ using PaulyMacs.Models;
 using PaulyMacs.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -46,6 +47,35 @@ namespace PaulyMacs.Controllers
             }
 
                 return View(itemVMList);
+        }
+
+        // GET: Shop/menuitem-details/name
+        [ActionName("menuitem-details")]
+        public ActionResult MenuItemDetails(string name)
+        {
+            MenuItemViewModel model;
+            MenuItem item;
+            int id = 0;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                if(!db.MenuItems.Any(x => x.Slug.Equals(name)))
+                {
+                    return RedirectToAction("Index", "Shop");
+                }
+
+                item = db.MenuItems.Where(x => x.Slug == name).FirstOrDefault();
+
+                id = item.MenuItemId;
+
+                model = new MenuItemViewModel(item);
+          
+            }
+
+            model.GalleryImages = Directory.EnumerateFiles(Server.MapPath("~/Images/Uploads/MenuItems/" + id + "/Gallery/Thumbs"))
+                                              .Select(fn => Path.GetFileName(fn));
+
+            return View("MenuItemDetails", model);
         }
     }
 }
