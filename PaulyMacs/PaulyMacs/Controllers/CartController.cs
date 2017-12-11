@@ -49,6 +49,9 @@ namespace PaulyMacs.Controllers
                     qty += item.Quantity;
                     price += item.Quantity * item.MenuItemPrice;
                 }
+
+                model.Quantity = qty;
+                model.MenuItemPrice = price;
             }
             else
             {
@@ -99,5 +102,67 @@ namespace PaulyMacs.Controllers
 
                 return PartialView(model);
             }
+
+        //GET: /Cart/IncrementItem
+        public JsonResult IncrementItem(int itemId)
+        {
+            List<CartViewModel> cart = Session["cart"] as List<CartViewModel>;
+
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                CartViewModel model = cart.FirstOrDefault(x => x.MenuItemId == itemId);
+
+                model.Quantity++;
+
+                var result = new { qty = model.Quantity, price = model.MenuItemPrice };
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
         }
+
+
+        //GET: /Cart/DecrementItem
+        public JsonResult DecrementItem(int itemId)
+        {
+            List<CartViewModel> cart = Session["cart"] as List<CartViewModel>;
+
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                CartViewModel model = cart.FirstOrDefault(x => x.MenuItemId == itemId);
+
+                if (model.Quantity > 1)
+                {
+                    model.Quantity--;
+                }
+                else
+                {
+                    model.Quantity = 0;
+                    cart.Remove(model);
+                }
+               
+
+                var result = new { qty = model.Quantity, price = model.MenuItemPrice };
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        public void DeleteItem(int itemId)
+        {
+            List<CartViewModel> cart = Session["cart"] as List<CartViewModel>;
+
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                CartViewModel model = cart.FirstOrDefault(x => x.MenuItemId == itemId);
+
+                cart.Remove(model);
+            }
+
+        }
+
     }
+ }

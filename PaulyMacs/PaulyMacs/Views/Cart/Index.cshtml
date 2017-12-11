@@ -46,11 +46,11 @@ else
                 <td>
                     @Html.DisplayFor(modelItem => item.MenuItemName)
                 </td>
-                <td>
+                <td class="qty@(item.MenuItemId)">
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MenuItemPrice)
+                    $@Html.DisplayFor(modelItem => item.MenuItemPrice)
                 </td>
 
                 <td>
@@ -60,9 +60,9 @@ else
                 <td>
                     <a href="#" class="incritem" data-id="item.MenuItemId">+</a>
                     <a href="#" class="decritem" data-id="item.MenuItemId">-</a>
-                    <a href="#" class="removeitem" data-id="item.MenuItemId">Remove</a>
+                    <a href="#" class="deleteitem" data-id="item.MenuItemId">Remove</a>
                 </td>
-                <td>
+                <td class="total@(item.MenuItemId)">
                     $@Html.DisplayFor(modelItem => item.CartTotal)
                 </td>
             </tr>
@@ -74,13 +74,100 @@ else
             <td></td>
             <td></td>
             <td></td>
-            <td>$@ViewBag.GrandTotal</td>
-
-
-
-
+            <td class="grandtotal"><b>Grand total </b>$<span>@ViewBag.GrandTotal</span></td>
         </tr>
 
     </table>
+
+}
+
+@section Scripts{
+   
+
+    <script>
+
+        //increment
+
+        $(function () {
+            $("a.incritem").click(function (e) {
+                e.preventDefault();
+
+                var itemId = $(this).data("id");
+                var url = "/cart/IncrementItem";
+
+                $.getJSON(url, { itemId: itemId }, function (data) {
+
+                    $("td.qty" + itemId).html(data.qty);
+
+                    var price = data.qty * data.price;
+                    var priceHtml = "$" + price.toFixed(2);
+
+                    $("td.total" + itemId).html(priceHtml);
+
+                    var gt = parseFloat($("td.grandtotal span").text());
+                    var grandtotal = (gt + data.price).toFixed(2);
+
+                    $("td.grandtotal span").text(grandtotal);
+                });
+            });
+
+        });
+
+            //decrement
+
+        $(function () {
+            $("a.decritem").click(function (e) {
+                e.preventDefault();
+
+
+                var $this = $(this);
+                var itemId = $(this).data("id");
+                var url = "/cart/DecrementItem";
+
+                $.getJSON(url, { itemId: itemId }, function (data) {
+
+                    if (data.qty == 0) {
+                        $this.parent().parent().fadeOut("fast", function () {
+                            location.reload();
+                        });
+                    }
+                    else {
+
+                        $("td.qty" + itemId).html(data.qty);
+
+                        var price = data.qty * data.price;
+                        var priceHtml = "$" + price.toFixed(2);
+
+                        $("td.total" + itemId).html(priceHtml);
+
+                        var gt = parseFloat($("td.grandtotal span").text());
+                        var grandtotal = (gt - data.price).toFixed(2);
+
+                        $("td.grandtotal span").text(grandtotal);
+                    };
+
+                });
+            });
+
+
+            //delete item
+
+            $(function () {
+                $("a.deleteitem").click(function (e) {
+                    e.preventDefault();
+
+                    var itemId = $(this).data("id");
+                    var url = "/cart/DeleteItem";
+
+                    $.get(url, { itemId: itemId }, function (data) {
+                        location.reload();
+                           
+                    });
+
+                });
+            });
+
+        });
+    </script>
 
 }
