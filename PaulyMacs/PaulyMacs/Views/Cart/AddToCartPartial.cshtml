@@ -1,0 +1,6 @@
+﻿@model PaulyMacs.Views.ViewModels.CartViewModel
+
+
+Your cart: @Model.Quantity item(s) - $@Model.MenuItemPrice
+<br />
+@Html.ActionLink("Checkout", "Index")

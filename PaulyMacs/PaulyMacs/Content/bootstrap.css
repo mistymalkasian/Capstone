@@ -4025,8 +4025,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   z-index: 1000;
-  min-height: 100px;
-  margin-bottom: 100px;
+  min-height: 50px;
+  margin-bottom: 20px;
   border: 1px solid transparent;
 }
 
@@ -4191,15 +4191,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
   margin-bottom: 0;
 }
 
-/*NAVBAR TITLE SETTINGS!*/
-
 .navbar-brand {
- float: left;  
-  padding: 15px 15px;  
-  font-size: 40px;  
-  line-height: 55px;  
-  font-family:Garamond;
-    
+  float: left;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
 }
 
 .navbar-brand:hover,
@@ -4249,7 +4245,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
-  line-height: 55px;
+  line-height: 20px;
 }
 
 @media (max-width: 767px) {
@@ -4504,22 +4500,18 @@ textarea.input-group-sm > .input-group-btn > .btn {
   color: #333333;
 }
 
-/*CHANGE NAVBAR COLOR*/
-
 .navbar-inverse {
-  background-color: white;
-  border-color: white;
+  background-color: #222222;
+  border-color: #080808;
 }
 
 .navbar-inverse .navbar-brand {
   color: #999999;
 }
 
-/*CHANGE WHAT COLOR THE WORDS ON NAVBAR ARE WHEN YOU HOVER OVER THEM*/
-
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: lightblue;
+  color: #ffffff;
   background-color: transparent;
 }
 
@@ -4533,7 +4525,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-  color: lightblue;
+  color: #ffffff;
   background-color: transparent;
 }
 
@@ -4544,12 +4536,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
   background-color: #080808;
 }
 
-/*FIGURE OUT WHAT THIS DOES?*/
-
 .navbar-inverse .navbar-nav > .disabled > a,
 .navbar-inverse .navbar-nav > .disabled > a:hover,
 .navbar-inverse .navbar-nav > .disabled > a:focus {
-  color: black;
+  color: #444444;
   background-color: transparent;
 }
 
@@ -4631,7 +4621,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .breadcrumb {
   padding: 8px 15px;
-  margin-bottom: 20p
+  margin-bottom: 20px;
   list-style: none;
   background-color: #f5f5f5;
   border-radius: 4px;
@@ -4938,14 +4928,13 @@ a.list-group-item.active > .badge,
 }
 
 .jumbotron {
-  padding: 100px;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  padding: 30px;
+  margin-bottom: 30px;
   font-size: 21px;
   font-weight: 200;
-  line-height: 8;
+  line-height: 2.1428571435;
   color: inherit;
-  background-color: black;
+  background-color: #eeeeee;
 }
 
 .jumbotron h1 {

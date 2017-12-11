@@ -1,0 +1,7 @@
+﻿@model PaulyMacs.Views.ViewModels.CartViewModel
+
+<div class="ajaxcart" style="color:white;">
+    Your cart: @Model.Quantity item(s) - $@Model.MenuItemPrice
+    <br />
+    @Html.ActionLink("Checkout", "Index")
+</div>

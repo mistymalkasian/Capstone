@@ -214,6 +214,7 @@
     <Compile Include="Areas\Admin\Views\Shop\MenuItemViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\SidebarViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -249,6 +250,7 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fancybox\blank.gif" />
@@ -741,6 +743,9 @@
     <Content Include="Views\Shop\CategoryMenuPartial.cshtml" />
     <Content Include="Views\Shop\Category.cshtml" />
     <Content Include="Views\Shop\MenuItemDetails.cshtml" />
+    <Content Include="Views\Cart\CartPartial.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\AddToCartPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
