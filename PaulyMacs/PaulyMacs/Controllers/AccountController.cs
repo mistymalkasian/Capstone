@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PaulyMacs.Models;
+using PaulyMacs.ViewModels;
 
 namespace PaulyMacs.Controllers
 {
@@ -486,5 +487,23 @@ namespace PaulyMacs.Controllers
             }
         }
         #endregion
+
+        public ActionResult UserNavPartial()
+        {
+            string username = User.Identity.Name;
+
+            UserNavPartialViewModel model;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                ApplicationUser user = db.Users.FirstOrDefault(x => x.UserName == username);
+
+                model = new UserNavPartialViewModel()
+                {
+                    Email = user.Email,
+                };
+            }
+                return PartialView(model);
+        }
     }
 }

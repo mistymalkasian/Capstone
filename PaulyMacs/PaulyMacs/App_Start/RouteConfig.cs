@@ -22,12 +22,13 @@ namespace PaulyMacs
             routes.MapRoute("Default", "", new { controller = "Pages", action = "Index" }, new[] { "PaulyMacs.Controllers" });
 
 
+      
 
             routes.MapRoute(
                 name: "Home",
                 url: "",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-                //namespaces: new[] { "PaulyMacs.Controllers" }
+                
             );
 
 
@@ -35,8 +36,17 @@ namespace PaulyMacs
               name: "Account",
               url: "Account/Register",
               defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional }
-          //namespaces: new[] { "PaulyMacs.Controllers" }
+          
           );
+
+            routes.MapRoute(
+             name: "Login",
+             url: "Account/Login",
+             defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
+
+         );
+
+
         }
     }
 }
