@@ -25,13 +25,13 @@
                 <ul class="nav navbar-nav">
                     @Html.Action("PagesMenuPartial", "Pages")
                    
-           @if (User.IsInRole("Admin"))
+           @if (User.IsInRole("Customer"))
            {
-               <text>You are admin</text>
+               <text>You are customer</text>
            }
            else
            {
-               <text>You are not admin</text>
+               <text>You are not customer</text>
            }
 
 

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PaulyMacs.Models;
 using PaulyMacs.ViewModels;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace PaulyMacs.Controllers
 {
@@ -156,6 +157,15 @@ namespace PaulyMacs.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                var roleStore = new RoleStore<IdentityRole>(db);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                var userStore = new UserStore<ApplicationUser>(db);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                userManager.AddToRole(user.Id, "Customer");
+
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
