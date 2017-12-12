@@ -46,6 +46,13 @@ namespace PaulyMacs
 
          );
 
+            routes.MapRoute(
+          name: "LogOff",
+          url: "Account/LogOff",
+          defaults: new { controller = "Account", action = "LogOff", id = UrlParameter.Optional }
+
+      );
+
 
         }
     }

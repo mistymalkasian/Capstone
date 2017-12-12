@@ -71,7 +71,7 @@ namespace PaulyMacs
                 //Here we create a Admin super user who will maintain the website                  
 
                 var user = new ApplicationUser();
-                user.UserName = "Admin";
+                user.UserName = "admin@gmail.com";
                 user.Email = "admin@gmail.com";
 
                 string userPWD = "Administrator01!";
@@ -86,7 +86,46 @@ namespace PaulyMacs
                 }
             }
 
-            // creating Creating Manager role    
+
+
+
+
+
+
+            // creating employee role    
+            if (!roleManager.RoleExists("Employee"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Employee";
+                roleManager.Create(role);
+
+            }
+
+            //create employee user
+
+            var employee = new ApplicationUser();
+            employee.UserName = "employee@gmail.com";
+            employee.Email = "employee@gmail.com";
+
+            string user2PWD = "Employee01!";
+
+            var chkUser2 = UserManager.Create(employee, user2PWD);
+
+            //Add default User to Role Employee   
+            if (chkUser2.Succeeded)
+            {
+                var result1 = UserManager.AddToRole(employee.Id, "Employee");
+
+            }
+
+
+
+
+
+
+
+
+            // creating Customer role    
             if (!roleManager.RoleExists("Customer"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
@@ -95,12 +134,21 @@ namespace PaulyMacs
 
             }
 
-            // creating Creating Employee role    
-            if (!roleManager.RoleExists("Employee"))
+
+            //create customer user
+
+            var customer = new ApplicationUser();
+            customer.UserName = "customer@gmail.com";
+            customer.Email = "customer@gmail.com";
+
+            string user3PWD = "Customer01!";
+
+            var chkUser3 = UserManager.Create(customer, user3PWD);
+
+            //Add default User to Role Customer  
+            if (chkUser3.Succeeded)
             {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Employee";
-                roleManager.Create(role);
+                var result1 = UserManager.AddToRole(customer.Id, "Customer");
 
             }
         }

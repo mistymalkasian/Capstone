@@ -25,11 +25,18 @@
                 <ul class="nav navbar-nav">
                     @Html.Action("PagesMenuPartial", "Pages")
                    
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+           @if (User.IsInRole("Admin"))
+           {
+               <text>You are admin</text>
+           }
+           else
+           {
+               <text>You are not admin</text>
+           }
+
+
                 </ul>
-                <ul class="float-right">
+                <ul class="float-md-right">
                     @Html.Partial("_LoginPartial")
 
                 </ul>
