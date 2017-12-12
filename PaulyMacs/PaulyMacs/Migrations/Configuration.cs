@@ -1,5 +1,8 @@
 namespace PaulyMacs.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -26,6 +29,23 @@ namespace PaulyMacs.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            //context.Roles.Add(new IdentityRole { Name = "Admin" });
+
+            //context.SaveChanges();
+
+            //ApplicationDbContext db = new ApplicationDbContext();
+            //UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            //RoleManager<IdentityRole> RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+
+
+
+            //ApplicationUser user = UserManager.FindByName("admin@gmail.com");
+            //IdentityRole role = RoleManager.FindByName("Admin");
+
+
+            //user.Roles.Add(role);
+            //role.Users.Add();
         }
     }
 }

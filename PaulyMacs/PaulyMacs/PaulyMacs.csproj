@@ -231,6 +231,30 @@
     <Compile Include="Migrations\201712072040176_Cringe.Designer.cs">
       <DependentUpon>201712072040176_Cringe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712112203163_please.cs" />
+    <Compile Include="Migrations\201712112203163_please.Designer.cs">
+      <DependentUpon>201712112203163_please.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712112213540_cmon.cs" />
+    <Compile Include="Migrations\201712112213540_cmon.Designer.cs">
+      <DependentUpon>201712112213540_cmon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712112215547_cmon1.cs" />
+    <Compile Include="Migrations\201712112215547_cmon1.Designer.cs">
+      <DependentUpon>201712112215547_cmon1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712112223113_roles.cs" />
+    <Compile Include="Migrations\201712112223113_roles.Designer.cs">
+      <DependentUpon>201712112223113_roles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712112330053_droptables.cs" />
+    <Compile Include="Migrations\201712112330053_droptables.Designer.cs">
+      <DependentUpon>201712112330053_droptables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712120013207_test.cs" />
+    <Compile Include="Migrations\201712120013207_test.Designer.cs">
+      <DependentUpon>201712120013207_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -762,6 +786,24 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712072040176_Cringe.resx">
       <DependentUpon>201712072040176_Cringe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712112203163_please.resx">
+      <DependentUpon>201712112203163_please.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712112213540_cmon.resx">
+      <DependentUpon>201712112213540_cmon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712112215547_cmon1.resx">
+      <DependentUpon>201712112215547_cmon1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712112223113_roles.resx">
+      <DependentUpon>201712112223113_roles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712112330053_droptables.resx">
+      <DependentUpon>201712112330053_droptables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712120013207_test.resx">
+      <DependentUpon>201712120013207_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
