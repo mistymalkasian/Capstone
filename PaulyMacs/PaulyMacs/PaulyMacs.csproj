@@ -772,6 +772,7 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Cart\AddToCartPartial.cshtml" />
     <Content Include="Views\Account\UserNavPartial.cshtml" />
+    <Content Include="Views\Cart\PayPalPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

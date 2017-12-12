@@ -6,9 +6,9 @@
     @Html.AntiForgeryToken()
         <li class="btn-group nav">
             <br />
-            <button type="button" class="btn navbar-btn" style="background-color:black; color:white;">Hello, @User.Identity.Name!</button>
-            <button type="button" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
+            <button type="button" class="btn navbar-btn" style="background-color:black; color:white; position: relative;">Hello, @User.Identity.Name!</button>
+            <button type="button" class="btn navbar-btn dropdown-toggle" data-toggle="dropdown" style="position:relative;">
+                <span class="caret" style="position:relative;"></span>
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">

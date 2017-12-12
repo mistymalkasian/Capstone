@@ -164,5 +164,12 @@ namespace PaulyMacs.Controllers
 
         }
 
+        public ActionResult PayPalPartial()
+        {
+            List<CartViewModel> cart = Session["cart"] as List<CartViewModel>;
+
+            return PartialView(cart);
+        }
+
     }
  }

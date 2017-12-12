@@ -60,9 +60,9 @@ else
                 </td>
 
                 <td>
-                    <a href="#" class="incritem" data-id="item.MenuItemId">+</a>
-                    <a href="#" class="decritem" data-id="item.MenuItemId">-</a>
-                    <a href="#" class="deleteitem" data-id="item.MenuItemId">Remove</a>
+                    <a href="#" class="incritem" data-id="@item.MenuItemId">+</a>
+                    <a href="#" class="decritem" data-id="@item.MenuItemId">-</a>
+                    <a href="#" class="deleteitem" data-id="@item.MenuItemId">Remove</a>
                 </td>
                 <td class="total@(item.MenuItemId)">
                     $@Html.DisplayFor(modelItem => item.CartTotal)
@@ -81,23 +81,25 @@ else
 
     </table>
 
-    <form class="paypalform" action ="https://www.sandbox.paypal.com/tn/cgi-bin/webscr" method="post">
-        <input type="hidden" name="cmd" value="_cart">
-        <input type="hidden" name="upload" value="1">
-        <input type="hidden" name="business" value="andrewandmisty-facilitator@gmail.com">
-        
-        @foreach (var item in Model)
-        {
-            <input type="hidden" name="item_name_@count" value="@item.MenuItemName">
-            <input type="hidden" name="amount_@count" value="@item.MenuItemPrice">
-            <input type="hidden" name="quantity_@count" value="@item.Quantity">
-            count++;
-        }
-      
+    <div class="paypaldiv">
+        <form class="paypalform" action="https://www.sandbox.paypal.com/tn/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_cart">
+            <input type="hidden" name="upload" value="1">
+            <input type="hidden" name="business" value="andrewandmisty-facilitator@gmail.com">
 
-        <input type="hidden" name="currency_code" value="USD">        
-        <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
-    </form>
+            @foreach (var item in Model)
+            {
+                <input type="hidden" name="item_name_@count" value="@item.MenuItemName">
+                <input type="hidden" name="amount_@count" value="@item.MenuItemPrice">
+                <input type="hidden" name="quantity_@count" value="@item.Quantity">
+                count++;
+            }
+
+
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+        </form>
+    </div>
 
     <br />
     <a href="#" class="placeorder btn btn-primary pull-right">Checkout</a>
@@ -131,6 +133,12 @@ else
                     var grandtotal = (gt + data.price).toFixed(2);
 
                     $("td.grandtotal span").text(grandtotal);
+                }).done(function (data) {
+                    var url2 = "/cart/PayPalPartial";
+
+                    $.get(url2, {}, function (data) {
+                        $('div.paypaldiv').html(data);
+                    });
                 });
             });
 
@@ -145,6 +153,7 @@ else
 
                 var $this = $(this);
                 var itemId = $(this).data("id");
+              
                 var url = "/cart/DecrementItem";
 
                 $.getJSON(url, { itemId: itemId }, function (data) {
@@ -169,6 +178,12 @@ else
                         $("td.grandtotal span").text(grandtotal);
                     };
 
+                }).done(function (data) {
+                    var url2 = "/cart/PayPalPartial";
+
+                    $.get(url2, {}, function (data) {
+                        $('div.paypaldiv').html(data);
+                    });
                 });
             });
 
