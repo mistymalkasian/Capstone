@@ -20,14 +20,17 @@
         $@Html.DisplayFor(model => model.ItemPrice)
         <br />
 
-        <div class="addtocart">
-            <a href="#" class="addtocart">Add to cart</a>
-            <span class="loader">
-                <img src="~/Content/Images/ajax-loader.gif" />
-            </span>
-
-            <span class="ajaxmsg">The item has been added to your cart!</span>
-        </div>
+        @if (Request.IsAuthenticated)
+        {
+            <div class="addtocart">
+                <a href="#" class="addtocart">Add to cart</a>
+                <span class="loader">
+                    <img src="~/Content/Images/ajax-loader.gif" />
+                </span>
+                <span class="ajaxmsg">The item has been added to your cart!</span>
+            </div>
+        }
+                
     </div>
 </div>
 

@@ -18,21 +18,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">Pauly Mac's at Four Lakes</a>  
-                        
+                <a href="/" class="navbar-brand">Pauly Mac's at Four Lakes</a>
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @Html.Action("PagesMenuPartial", "Pages")
-                   
-           @if (User.IsInRole("Customer"))
-           {
-               <text>You are customer</text>
-           }
-           else
-           {
-               <text>You are not customer</text>
-           }
+
+
+                    @if(User.IsInRole("Admin"))
+                    {
+                        <ul class="navbar-collapse collapse navbar-right adminarea">
+                            <li>@Html.ActionLink("Admin Area", "Index", "Dashboard", new { area = "Admin" }, null )</li>
+                        </ul>
+                    }
 
 
                 </ul>
@@ -40,12 +39,12 @@
                     @Html.Partial("_LoginPartial")
 
                 </ul>
-                
+
 
                 <ul class="navbar-collapse collapse navbar-right">
                     @Html.Action("CartPartial", "Cart")
                 </ul>
-               
+
             </div>
         </div>
     </div>
@@ -76,12 +75,17 @@
             }
 
         </div>
-
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Pauly Mac's at Four Lakes</p>
-        </footer>
     </div>
+    @if (User.IsInRole("Customer"))
+            {
+
+            <hr />
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Pauly Mac's at Four Lakes</p>
+            </footer>
+
+             }
 
     @Scripts.Render("~/bundles/scripts")
     @RenderSection("scripts", required: false)
