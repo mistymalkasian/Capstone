@@ -85,7 +85,7 @@ else
         <form class="paypalform" action="https://www.sandbox.paypal.com/tn/cgi-bin/webscr" method="post">
             <input type="hidden" name="cmd" value="_cart">
             <input type="hidden" name="upload" value="1">
-            <input type="hidden" name="business" value="jultranet-facilitator@gmail.com">
+            <input type="hidden" name="business" value="andrewandmisty-facilitator@gmail.com">
 
             @foreach (var item in Model)
             {
@@ -211,8 +211,6 @@ else
                 //place order
 
 
-                
-                $(function () {
                     $("a.placeorder").click(function (e) {
                         e.preventDefault();
 
@@ -225,7 +223,7 @@ else
                         $.post(url, { }, function (data) {
                             $(".ajaxbg span").text("Thank you. You will now be redirected to PayPal.");
                             setTimeout(function () {
-                                $('form input [name= "submit"]').click();
+                                $('form input[name="submit"]').click();
                             }, 2000);
 
                         });
@@ -233,8 +231,6 @@ else
                     });
 
                 });
-
-            });
 
     </script>
 

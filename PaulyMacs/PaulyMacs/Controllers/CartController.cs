@@ -202,7 +202,7 @@ namespace PaulyMacs.Controllers
                     order.UserId = userId;
                     order.OrderContents = item.MenuItemName;
 
-                    db.Orders.Add(order);
+                   // db.Orders.Add(order);
                     db.SaveChanges();
                 }
 
