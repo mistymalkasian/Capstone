@@ -32,6 +32,20 @@ namespace PaulyMacs
                 
             );
 
+            routes.MapRoute(
+          name: "Contact",
+          url: "Home/Contact",
+          defaults: new { controller = "Home", action = "Contact", id = UrlParameter.Optional }
+
+      );
+
+            routes.MapRoute(
+    name: "Sent",
+    url: "Home/Sent",
+    defaults: new { controller = "Home", action = "Sent", id = UrlParameter.Optional }
+
+);
+
 
             routes.MapRoute(
               name: "Account",

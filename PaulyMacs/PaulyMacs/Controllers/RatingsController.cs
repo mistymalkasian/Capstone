@@ -115,7 +115,7 @@ namespace PaulyMacs.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Rating rating = db.Ratings.Find(id);
-            db.Ratings.Remove(rating);
+            db.Ratings.Remove(rating);  
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <h4>How are we doing? We value your comments!</h4>
+    <h4>How are we doing? Please rate the service you received today<br /> and add any additional comments in the box below.</h4>
     <hr />
     <div class="form-group">
         @Html.LabelFor(m => m.FromName, new { @class = "col-md-2 control-label" })
