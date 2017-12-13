@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PaulyMacs.Models
 {
@@ -64,6 +65,11 @@ namespace PaulyMacs.Models
 
     public class RegisterViewModel
     {
+        [ForeignKey("ApplicationUser")]
+        public string UserId { get; set; }
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

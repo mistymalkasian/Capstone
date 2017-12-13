@@ -272,6 +272,22 @@
     <Compile Include="Migrations\201712130202277_addedorderstuff.Designer.cs">
       <DependentUpon>201712130202277_addedorderstuff.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712131529314_addedtoorders.cs" />
+    <Compile Include="Migrations\201712131529314_addedtoorders.Designer.cs">
+      <DependentUpon>201712131529314_addedtoorders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712131550080_heregoesnothing.cs" />
+    <Compile Include="Migrations\201712131550080_heregoesnothing.Designer.cs">
+      <DependentUpon>201712131550080_heregoesnothing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712131611520_ugh.cs" />
+    <Compile Include="Migrations\201712131611520_ugh.Designer.cs">
+      <DependentUpon>201712131611520_ugh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712131625231_b.cs" />
+    <Compile Include="Migrations\201712131625231_b.Designer.cs">
+      <DependentUpon>201712131625231_b.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -838,6 +854,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712130202277_addedorderstuff.resx">
       <DependentUpon>201712130202277_addedorderstuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131529314_addedtoorders.resx">
+      <DependentUpon>201712131529314_addedtoorders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131550080_heregoesnothing.resx">
+      <DependentUpon>201712131550080_heregoesnothing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131611520_ugh.resx">
+      <DependentUpon>201712131611520_ugh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131625231_b.resx">
+      <DependentUpon>201712131625231_b.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

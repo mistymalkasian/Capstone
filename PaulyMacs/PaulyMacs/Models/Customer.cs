@@ -9,8 +9,10 @@ namespace PaulyMacs.Models
 {
     public class Customer
     {
-        [Key]
-        public int CustomerId { get; set; }
+
+        [Key, ForeignKey("ApplicationUser")]
+        public string UserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -29,7 +31,10 @@ namespace PaulyMacs.Models
         [DataType(DataType.Currency)]
         public double BalanceOwed { get; set; }
 
-        public string UserId { get; set; }
+
+
+       
+
 
     }
 }

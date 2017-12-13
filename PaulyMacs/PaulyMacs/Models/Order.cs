@@ -15,12 +15,13 @@ namespace PaulyMacs.Models
         public bool isOrderOpen { get; set; }
         public string OrderContents { get; set; }
 
+        public int Quantity { get; set; }
+
         [DataType(DataType.Currency)]
         public decimal OrderTotalPrice { get; set; }
 
         //Foreign Keys
 
-        public int CustomerId { get; set; }
         
         public string UserId { get; set; }
 

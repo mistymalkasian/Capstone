@@ -15,6 +15,8 @@ namespace PaulyMacs.Views.ViewModels
         public decimal CartTotal { get { return Quantity * MenuItemPrice; } }
         public string Image { get; set; }
 
+
+  
         //public string Message { get; set; }
 
         //public IEnumerable<MenuItem> CartItems { get; set; }

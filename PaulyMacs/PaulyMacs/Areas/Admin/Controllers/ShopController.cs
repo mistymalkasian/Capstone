@@ -513,9 +513,9 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
                         string itemName = item.ItemName;
 
-                        productsAndQty.Add(itemName, orderDetails.OrderId);
+                        productsAndQty.Add(itemName, orderDetails.Quantity);
 
-                        total += orderDetails.OrderTotalPrice;
+                        total += orderDetails.Quantity * price;
                     }
 
                     ordersForAdmin.Add(new OrdersForAdminViewModel()

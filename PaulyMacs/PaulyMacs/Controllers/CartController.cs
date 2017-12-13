@@ -191,9 +191,11 @@ namespace PaulyMacs.Controllers
                 
                 foreach (var item in cart)
                 {
+                    
                     order.UserId = userId;
                     order.OrderContents = item.MenuItemName;
                     order.OrderTotalPrice = item.MenuItemPrice;
+                    order.Quantity = item.Quantity;
                 }
 
                

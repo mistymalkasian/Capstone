@@ -30,8 +30,6 @@ namespace PaulyMacs.Views.Shop
 
         public decimal OrderTotalPrice { get; set; }
 
-        public int CustomerId { get; set; }
-
         public string UserId { get; set; }
 
     }
