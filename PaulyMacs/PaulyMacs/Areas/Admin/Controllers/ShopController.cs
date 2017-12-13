@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using PagedList;
+using PaulyMacs.Views.Shop;
 
 namespace PaulyMacs.Areas.Admin.Controllers
 {
@@ -479,6 +480,60 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
             if (System.IO.File.Exists(fullPath2))
                 System.IO.File.Delete(fullPath2);
+        }
+
+        //Get: Admin/Shop/Orders
+        public ActionResult Orders()
+        {
+            List<OrdersForAdminViewModel> ordersForAdmin = new List<OrdersForAdminViewModel>();
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                List<OrderViewModel> orders = db.Orders.ToArray().Select(x => new OrderViewModel(x)).ToList();
+
+
+                foreach (var order in orders)
+                {
+                    Dictionary<string, int> productsAndQty = new Dictionary<string, int>();
+
+
+                    decimal total = 0m;
+
+                    List<Order> orderDetailsList = db.Orders.Where(x => x.OrderId == order.OrderId).ToList();
+
+                    ApplicationUser user = db.Users.Where(x => x.Id == order.UserId).FirstOrDefault();
+
+                    string username = user.UserName;
+
+                    foreach(var orderDetails in orderDetailsList)
+                    {
+                        MenuItem item = db.MenuItems.Where(x => x.MenuItemId == orderDetails.MenuItemId).FirstOrDefault();
+
+                        decimal price = item.ItemPrice;
+
+                        string itemName = item.ItemName;
+
+                        productsAndQty.Add(itemName, orderDetails.OrderId);
+
+                        total += orderDetails.OrderTotalPrice;
+                    }
+
+                    ordersForAdmin.Add(new OrdersForAdminViewModel()
+
+                    {
+                        OrderNumber = order.OrderId,
+                        Username = username,
+                        Total = total,
+                        ProductsAndQty = productsAndQty,
+                        OrderDate = order.OrderDate
+                                        
+                    });
+
+                }
+
+            }
+
+            return View(ordersForAdmin);
         }
     }
 }

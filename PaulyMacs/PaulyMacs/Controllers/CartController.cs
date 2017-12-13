@@ -187,24 +187,21 @@ namespace PaulyMacs.Controllers
                 var user = db.Users.FirstOrDefault(x => x.UserName == username);
                 string userId = user.Id;
 
-               // order.CustomerId = userId;
+                int orderId = order.OrderId;
+                
+                foreach (var item in cart)
+                {
+                    order.UserId = userId;
+                    order.OrderContents = item.MenuItemName;
+                    order.OrderTotalPrice = item.MenuItemPrice;
+                }
+
+               
                 order.OrderDate = DateTime.Now;
                 order.isOrderOpen = true;
 
                 db.Orders.Add(order);
                 db.SaveChanges();
-
-                int orderId = order.OrderId;
-                
-                foreach (var item in cart)
-                {
-                    //order.OrderId = orderId;
-                    order.UserId = userId;
-                    order.OrderContents = item.MenuItemName;
-
-                   // db.Orders.Add(order);
-                    db.SaveChanges();
-                }
 
             }
 
