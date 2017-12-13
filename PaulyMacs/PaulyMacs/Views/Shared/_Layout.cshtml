@@ -33,11 +33,9 @@
                         </ul>
                     }
 
-
                 </ul>
                 <ul class="float-md-right">
                     @Html.Partial("_LoginPartial")
-
                 </ul>
 
 
@@ -52,10 +50,17 @@
     <div class="container body-content">
         <div class="row">
 
-            <div class="col-xs-12 col-md-2">
-
-                @Html.Action("CategoryMenuPartial", "Shop")
-            </div>
+            @if (ViewBag.Title != "Create Account" &&
+                 ViewBag.Title != "Log in" &&
+                 ViewBag.Title != "User Profile" &&
+                 ViewBag.Title != "Register" &&
+                 ViewBag.Title != "Orders")
+            {
+                <div class="col-xs-12 col-md-2">
+                    @Html.Action("CategoryMenuPartial", "Shop")
+                </div>
+            }
+            
 
             @if (ViewBag.Sidebar == "Yes")
             {
@@ -64,7 +69,6 @@
                 </div>
                 <div class="col-xs-12 col-md-3">
                     @Html.Action("SidebarPartial", "Pages")
-
                 </div>
             }
             else

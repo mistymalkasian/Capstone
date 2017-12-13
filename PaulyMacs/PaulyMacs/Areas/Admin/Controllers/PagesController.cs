@@ -257,6 +257,17 @@ namespace PaulyMacs.Areas.Admin.Controllers
             return RedirectToAction("EditSidebar");
         }
 
+        public ActionResult PagesMenuPartial()
+        {
+            List<PageViewModel> pageVMList;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                pageVMList = db.Pages.ToArray().OrderBy(x => x.Sorting).Where(x => x.Slug != "home").Select(x => new PageViewModel(x)).ToList();
+            }
+            return PartialView(pageVMList);
+        }
+
 
 
 
