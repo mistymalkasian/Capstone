@@ -18,10 +18,14 @@ namespace PaulyMacs.Models
         [DataType(DataType.Currency)]
         public decimal OrderTotalPrice { get; set; }
 
-        //Foreign Key
+        //Foreign Keys
 
         public int CustomerId { get; set; }
         
-        public Customer Customer { get; set; }
+        //public Customer Customer { get; set; }
+
+
+        public string UserId { get; set; }
+        //public ApplicationUser User { get; set; }
     }
 }

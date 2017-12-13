@@ -14,12 +14,12 @@ namespace PaulyMacs.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Orders
-        public ActionResult Index()
-        {
-            var orders = db.Orders.Include(o => o.Customer);
-            return View(orders.ToList());
-        }
+        //// GET: Orders
+        //public ActionResult Index()
+        //{
+        //    var orders = db.Orders.Include(o => o.Customer);
+        //    return View(orders.ToList());
+        //}
 
         // GET: Orders/Details/5
         public ActionResult Details(int? id)

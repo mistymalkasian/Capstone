@@ -171,5 +171,48 @@ namespace PaulyMacs.Controllers
             return PartialView(cart);
         }
 
+        //POST: /Cart/PlaceOrder
+        [HttpPost]
+        public void PlaceOrder()
+        {
+            List<CartViewModel> cart = Session["cart"] as List<CartViewModel>;
+
+            string username = User.Identity.Name;
+            
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                Order order = new Order();
+
+                var user = db.Users.FirstOrDefault(x => x.UserName == username);
+                string userId = user.Id;
+
+               // order.CustomerId = userId;
+                order.OrderDate = DateTime.Now;
+                order.isOrderOpen = true;
+
+                db.Orders.Add(order);
+                db.SaveChanges();
+
+                int orderId = order.OrderId;
+                
+                foreach (var item in cart)
+                {
+                    //order.OrderId = orderId;
+                    order.UserId = userId;
+                    order.OrderContents = item.MenuItemName;
+
+                    db.Orders.Add(order);
+                    db.SaveChanges();
+                }
+
+            }
+
+            //MAYBE SEND AN EMAIL TO THE ADMIN IF I DECIDE I WANT TO, BUT FOR NOW WILL JUST SHOW OPEN ORDERS IN AN EMPLOYEE VIEW
+
+            Session["cart"] = null;
+            
+        }
+
     }
  }

@@ -85,7 +85,7 @@ else
         <form class="paypalform" action="https://www.sandbox.paypal.com/tn/cgi-bin/webscr" method="post">
             <input type="hidden" name="cmd" value="_cart">
             <input type="hidden" name="upload" value="1">
-            <input type="hidden" name="business" value="andrewandmisty-facilitator@gmail.com">
+            <input type="hidden" name="business" value="jultranet-facilitator@gmail.com">
 
             @foreach (var item in Model)
             {
@@ -114,6 +114,9 @@ else
         //increment
 
         $(function () {
+
+
+
             $("a.incritem").click(function (e) {
                 e.preventDefault();
 
@@ -142,11 +145,10 @@ else
                 });
             });
 
-        });
 
             //decrement
 
-        $(function () {
+
             $("a.decritem").click(function (e) {
                 e.preventDefault();
 
@@ -190,7 +192,7 @@ else
 
             //delete item
 
-            $(function () {
+
                 $("a.deleteitem").click(function (e) {
                     e.preventDefault();
 
@@ -203,9 +205,37 @@ else
                     });
 
                 });
+
+
+
+                //place order
+
+
+                
+                $(function () {
+                    $("a.placeorder").click(function (e) {
+                        e.preventDefault();
+
+                        var $this = $(this);
+
+                        var url = "/cart/PlaceOrder";
+
+                        $(".ajaxbg").show();
+
+                        $.post(url, { }, function (data) {
+                            $(".ajaxbg span").text("Thank you. You will now be redirected to PayPal.");
+                            setTimeout(function () {
+                                $('form input [name= "submit"]').click();
+                            }, 2000);
+
+                        });
+
+                    });
+
+                });
+
             });
 
-        });
     </script>
 
 }
