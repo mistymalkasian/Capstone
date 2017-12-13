@@ -503,7 +503,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
                     ApplicationUser user = db.Users.Where(x => x.Id == order.UserId).FirstOrDefault();
 
-                    string username = user.UserName;
+                    string username = user.Email;
 
                     foreach(var orderDetails in orderDetailsList)
                     {
@@ -522,7 +522,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
                     {
                         OrderNumber = order.OrderId,
-                        Username = username,
+                        Username = user.Email,
                         Total = total,
                         ProductsAndQty = productsAndQty,
                         OrderDate = order.OrderDate
