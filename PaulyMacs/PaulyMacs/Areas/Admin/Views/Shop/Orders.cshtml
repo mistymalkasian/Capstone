@@ -33,7 +33,10 @@ else
         </tr>
 
         @foreach (var item in Model)
+
         {
+            if (item.isOrderOpen == true)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.OrderNumber)
@@ -43,9 +46,9 @@ else
                 </td>
                 <td>
                     @foreach (var item2 in item.ProductsAndQty)
-                    {
+                        {
                         @item2.Key @:x @item2.Value <br />
-                    }
+                        }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.OrderDate)
@@ -55,12 +58,21 @@ else
                 </td>
 
                 <td>
-                    <input type="button" value="Complete Order" onclick="location.href='@Url.Action("SendMsgsAndConfirm", "Employees")'" />
+                    <input type="button" value="Complete Order" onclick="location.href='@Url.Action("SendMsgsAndConfirm", "Shop", new {Area = "Admin"})'" />
                 </td>
             </tr>
 
-        }
+            }
+            else
+            {
+                <text>There are no open orders currently.</text>
+            }
 
-    </table>
+
+        }
+                
+</table>
+
 }
+              
 

@@ -21,6 +21,7 @@ namespace PaulyMacs.Views.Shop
             UserId = row.UserId;
             OrderDate = row.OrderDate;
             MenuItemId = row.MenuItemId;
+            isOrderOpen = row.isOrderOpen;
         }
 
 

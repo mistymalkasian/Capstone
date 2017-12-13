@@ -12,5 +12,7 @@ namespace PaulyMacs.Areas.Admin.ViewModels
         public decimal Total { get; set; }
         public Dictionary<string, int> ProductsAndQty { get; set; }
         public DateTime OrderDate { get; set; }
+        public bool isOrderOpen { get; set; }
+
     }
 }

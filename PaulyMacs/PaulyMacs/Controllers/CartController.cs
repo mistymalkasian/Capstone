@@ -197,12 +197,15 @@ namespace PaulyMacs.Controllers
                     order.OrderTotalPrice = item.MenuItemPrice;
                     order.Quantity = item.Quantity;
                     order.MenuItemId = item.MenuItemId;
+                    
+                   
                 }
 
                 order.OrderTotalPrice = order.OrderTotalPrice * order.Quantity;
                
                 order.OrderDate = DateTime.Now;
                 order.isOrderOpen = true;
+                
 
                 db.Orders.Add(order);
                 db.SaveChanges();

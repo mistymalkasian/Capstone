@@ -11,6 +11,9 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using PagedList;
 using PaulyMacs.Views.Shop;
+using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Net;
 
 namespace PaulyMacs.Areas.Admin.Controllers
 {
@@ -525,7 +528,9 @@ namespace PaulyMacs.Areas.Admin.Controllers
                         Username = user.Email,
                         Total = total,
                         ProductsAndQty = productsAndQty,
-                        OrderDate = order.OrderDate
+                        OrderDate = order.OrderDate,
+                        isOrderOpen = order.isOrderOpen
+                        
                                         
                     });
 
@@ -534,6 +539,71 @@ namespace PaulyMacs.Areas.Admin.Controllers
             }
 
             return View(ordersForAdmin);
+        }
+
+        public ActionResult CompletedOrder()
+        {
+            return View();
+        }
+
+        public async Task<ActionResult> SendMsgsAndConfirm(Order order)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            if (ModelState.IsValid)
+            {
+                //var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+                var message = new MailMessage();
+                message.To.Add(new MailAddress("andrewandmisty@gmail.com"));
+                message.From = new MailAddress("devcodecamptest@gmail.com");
+                message.Subject = "Rate Us!";
+                message.Body = "Were you happy with the service you received today? <br> Follow this link to tell us how we did: <a href=\"google.com\">Rate my Service</a>";
+                message.IsBodyHtml = true;
+
+                using (var smtp = new SmtpClient())
+                {
+                    var credential = new NetworkCredential
+                    {
+                        UserName = "devcodecamptest@gmail.com",
+                        Password = "devCodeDawg02"
+                    };
+                    smtp.Credentials = credential;
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    await smtp.SendMailAsync(message);
+                    await SendText();
+                    order.isOrderOpen = false;
+                    db.SaveChanges();
+                }
+            }
+            return View("CompletedOrder");
+        }
+
+        public async Task<ActionResult> SendText()
+        {
+            //var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+            var message = new MailMessage();
+            message.To.Add(new MailAddress("2629946699@email.uscc.net"));
+            message.From = new MailAddress("devcodecamptest@gmail.com");
+            message.Subject = "Your order is ready to be picked up at Pauly Mac's!";
+            message.Body = "We hope you enjoy your meal, and make sure to rate us!";
+            message.IsBodyHtml = true;
+
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = "devcodecamptest@gmail.com",
+                    Password = "devCodeDawg02"
+                };
+                smtp.Credentials = credential;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                await smtp.SendMailAsync(message);
+                return View();
+            }
         }
     }
 }

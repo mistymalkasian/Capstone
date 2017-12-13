@@ -20,9 +20,10 @@ namespace PaulyMacs
             routes.MapRoute("PagesMenuPartial", "Pages/PagesMenuPartial", new { controller = "Pages", action = "PagesMenuPartial" }, new[] { "PaulyMacs.Controllers" });
             routes.MapRoute("Pages", "{page}", new { controller = "Pages", action = "Index" }, new[] { "PaulyMacs.Controllers" });
             routes.MapRoute("Default", "", new { controller = "Pages", action = "Index" }, new[] { "PaulyMacs.Controllers" });
+            //routes.MapRoute("Orders", "Areas/Admin/Orders", new { controller = "Shop", action = "Orders" }, new[] { "PaulyMacs.Controllers" });
 
 
-      
+
 
             routes.MapRoute(
                 name: "Home",
@@ -52,6 +53,7 @@ namespace PaulyMacs
           defaults: new { controller = "Account", action = "LogOff", id = UrlParameter.Optional }
 
       );
+
 
 
         }
