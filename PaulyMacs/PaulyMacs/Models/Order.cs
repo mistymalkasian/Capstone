@@ -13,7 +13,7 @@ namespace PaulyMacs.Models
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }
         public bool isOrderOpen { get; set; }
-        public string OrderContents { get; set; }
+        public IEnumerable<string> OrderContents { get; set; }
 
         public int Quantity { get; set; }
 

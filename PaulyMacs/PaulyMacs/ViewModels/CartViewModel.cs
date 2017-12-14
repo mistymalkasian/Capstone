@@ -19,7 +19,7 @@ namespace PaulyMacs.Views.ViewModels
   
         //public string Message { get; set; }
 
-        //public IEnumerable<MenuItem> CartItems { get; set; }
+        public IEnumerable<string> CartItems { get; set; }
 
 
     }

@@ -22,20 +22,19 @@ namespace PaulyMacs.Views.Shop
             OrderDate = row.OrderDate;
             MenuItemId = row.MenuItemId;
             isOrderOpen = row.isOrderOpen;
+            OrderContents = row.OrderContents;
         }
 
 
         public int OrderId { get; set; }
+
         public DateTime OrderDate { get; set; }
+
         public bool isOrderOpen { get; set; }
-
-
 
         public int MenuItemId { get; set; }
 
-
-
-        public string OrderContents { get; set; }
+        public IEnumerable<string> OrderContents { get; set; }
 
         public decimal OrderTotalPrice { get; set; }
 

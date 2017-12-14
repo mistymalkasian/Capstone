@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace PaulyMacs.Controllers
 {
+    [Authorize(Roles = "Admin, Employee")]
     public class EmployeesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -126,15 +127,13 @@ namespace PaulyMacs.Controllers
             base.Dispose(disposing);
         }
 
-
-        [Authorize(Roles = "Admin, Employee")]
+        
         public ActionResult OpenOrders()
         {
             return View();
         }
 
 
-        [Authorize(Roles = "Admin, Employee")]
         public ActionResult Orders()
         {
             return View();

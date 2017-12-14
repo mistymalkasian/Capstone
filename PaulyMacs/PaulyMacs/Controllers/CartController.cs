@@ -193,7 +193,7 @@ namespace PaulyMacs.Controllers
                 {
                     
                     order.UserId = userId;
-                    order.OrderContents = item.MenuItemName;
+                    order.OrderContents = item.CartItems;
                     order.OrderTotalPrice = item.MenuItemPrice;
                     order.Quantity = item.Quantity;
                     order.MenuItemId = item.MenuItemId;
