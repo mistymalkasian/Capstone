@@ -17,9 +17,10 @@ using System.Net;
 
 namespace PaulyMacs.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin, Employee")]
+
     public class ShopController : Controller
     {
+        [Authorize(Roles = "Admin")]
         // GET: Admin/Shop/Categories
         public ActionResult Categories()
         {
@@ -33,7 +34,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
                 return View(CategoryVMList);
         }
 
-
+        [Authorize(Roles = "Admin")]
         // POST: Admin/Shop/AddNewCategory
         [HttpPost]
         public string AddNewCategory(string catName)
@@ -63,7 +64,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
 
         // POST: Admin/Shop/ReorderCategories
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public void ReorderCategories(int[] id)
         {
@@ -86,6 +87,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
 
         // GET: Admin/Shop/DeleteCategory/id
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteCategory(int id)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
@@ -102,6 +104,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
 
         // POST: Admin/Shop/RenameCategory/id
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public string RenameCategory(string newCatName, int id)
         {
@@ -123,6 +126,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
 
         // GET: Admin/Shop/AddMenuItem
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult AddMenuItem()
         {
@@ -138,6 +142,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         }
 
         // POST: Admin/Shop/AddMenuItem
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult AddMenuItem(MenuItemViewModel model, HttpPostedFileBase file)
         {
@@ -258,6 +263,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
 
         //GET: Admin/Shop/MenuItems
+        [Authorize(Roles = "Admin")]
         public ActionResult MenuItems(int? page, int? catId)
         {
             List<MenuItemViewModel> listOfItemVM;
@@ -285,6 +291,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
 
         //GET: Admin/Shop/EditMenuItem/id
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult EditMenuItem(int id)
         {
@@ -315,6 +322,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
 
 
         //POST: Admin/Shop/EditMenuItem/id
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult EditMenuItem(MenuItemViewModel model, HttpPostedFileBase file)
         {
@@ -425,6 +433,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         }
 
         //GET: Admin/Shop/DeleteMenuItem/id
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteMenuItem(int id)
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
@@ -446,6 +455,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         }
 
         //POST: Admin/Shop/SaveGalleryImages
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public void SaveGalleryImages(int id)
         {
@@ -473,6 +483,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         }
 
         //POST: Admin/Shop/DeleteImage
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public void DeleteImage(int id, string imageName)
         {
@@ -543,11 +554,13 @@ namespace PaulyMacs.Areas.Admin.Controllers
             return View(ordersForAdmin);
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public ActionResult CompletedOrder()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<ActionResult> SendMsgsAndConfirm(Order order)
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -582,6 +595,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
             return View("CompletedOrder");
         }
 
+        [Authorize(Roles = "Admin, Employee")]
         public async Task<ActionResult> SendText()
         {
             //var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";

@@ -38,11 +38,13 @@
                     @Html.Partial("_LoginPartial")
                 </ul>
 
-
-                <ul class="navbar-collapse collapse navbar-right">
-                    @Html.Action("CartPartial", "Cart")
-                </ul>
-
+                @if (User.IsInRole("Customer"))
+                {
+                    <ul class="navbar-collapse collapse navbar-right">
+                        @Html.Action("CartPartial", "Cart")
+                    </ul>
+                }
+                
             </div>
         </div>
     </div>
