@@ -554,13 +554,13 @@ namespace PaulyMacs.Areas.Admin.Controllers
             return View(ordersForAdmin);
         }
 
-        [Authorize(Roles = "Admin, Employee")]
+        [Authorize(Roles = "Employee, Admin")]
         public ActionResult CompletedOrder()
         {
             return View();
         }
 
-        [Authorize(Roles = "Admin, Employee")]
+        [Authorize(Roles = "Employee, Admin")]
         public async Task<ActionResult> SendMsgsAndConfirm(Order order)
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -620,6 +620,17 @@ namespace PaulyMacs.Areas.Admin.Controllers
                 await smtp.SendMailAsync(message);
                 return View();
             }
+        }
+
+        public ActionResult CategoryMenuPartial()
+        {
+            List<CategoryViewModel> categoryVMList;
+
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                categoryVMList = db.Categories.ToArray().OrderBy(x => x.Sorting).Select(x => new CategoryViewModel(x)).ToList();
+            }
+            return PartialView(categoryVMList);
         }
     }
 }

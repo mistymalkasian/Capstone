@@ -24,6 +24,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @Html.Action("PagesMenuPartial", "Pages")
+                    @if (User.IsInRole("Employee"))
+                    {
+                        <li><a href="/admin/shop/Orders">Orders</a></li>
+                    }
 
 
                     @if(User.IsInRole("Admin"))
@@ -32,6 +36,7 @@
                             <li>@Html.ActionLink("Admin Area", "Index", "Dashboard", new { area = "Admin" }, null )</li>
                         </ul>
                     }
+
 
                 </ul>
                 <ul class="float-md-right">
