@@ -126,11 +126,15 @@ namespace PaulyMacs.Controllers
             base.Dispose(disposing);
         }
 
+
+        [Authorize(Roles = "Admin, Employee")]
         public ActionResult OpenOrders()
         {
             return View();
         }
 
+
+        [Authorize(Roles = "Admin, Employee")]
         public ActionResult Orders()
         {
             return View();

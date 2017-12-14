@@ -17,6 +17,7 @@ using System.Net;
 
 namespace PaulyMacs.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin, Employee")]
     public class ShopController : Controller
     {
         // GET: Admin/Shop/Categories
@@ -486,6 +487,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
         }
 
         //Get: Admin/Shop/Orders
+        [Authorize(Roles = "Admin, Employee")]
         public ActionResult Orders()
         {
             List<OrdersForAdminViewModel> ordersForAdmin = new List<OrdersForAdminViewModel>();

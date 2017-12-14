@@ -11,6 +11,7 @@ using PaulyMacs.Models;
 
 namespace PaulyMacs.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PagesController : Controller
     {
         // GET: Admin/Pages

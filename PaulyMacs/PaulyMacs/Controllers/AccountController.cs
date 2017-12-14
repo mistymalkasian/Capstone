@@ -498,6 +498,7 @@ namespace PaulyMacs.Controllers
         }
         #endregion
 
+        [Authorize]
         public ActionResult UserNavPartial()
         {
             string username = User.Identity.Name;
