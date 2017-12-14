@@ -62,7 +62,7 @@ namespace PaulyMacs.Controllers
                 return PartialView(pageVMList);
         }
 
-        public ActionResult SidebarPartial()
+        public PartialViewResult SidebarPartial()
         {
             SidebarViewModel model;
 
@@ -73,7 +73,7 @@ namespace PaulyMacs.Controllers
                 model = new SidebarViewModel(sidebar);
             }
 
-                return View(model);
+                return PartialView(model);
         }
     }
 }

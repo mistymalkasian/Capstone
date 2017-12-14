@@ -257,7 +257,7 @@ namespace PaulyMacs.Areas.Admin.Controllers
             return RedirectToAction("EditSidebar");
         }
 
-        public ActionResult PagesMenuPartial()
+        public PartialViewResult PagesMenuPartial()
         {
             List<PageViewModel> pageVMList;
 
